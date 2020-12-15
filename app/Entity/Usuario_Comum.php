@@ -9,7 +9,7 @@ class Usuario_Comum{
 
     /**
      * Identificador unico do usuario
-     * @var integer
+     * @var string
      */
     public $userC_matricula;
 
@@ -26,10 +26,10 @@ class Usuario_Comum{
     public $userC_email;
 
     /**
-     * Senha de Login
+     * Id do Usuario
      * @var string
      */
-    public $userC_senha;
+    public $userC_idUser;
 
     /**
      * Metodo responsavel por cadastrar um novo usuario no banco
@@ -39,10 +39,10 @@ class Usuario_Comum{
         //INSERIR USUARIO NO BANCO
         $obDatabase = new Database('usuario_comum');
         $this->userC_matricula = $obDatabase->insert([
-                                'userC_matricula'      => $this->userC_matricula,
+                                'userC_matricula' => $this->userC_matricula,
                                 'userC_nome'  => $this->userC_nome,
                                 'userC_email'  => $this->userC_email,
-                                'userC_senha'  => $this->userC_senha,
+                                'userC_idUser'  => $this->userC_idUser,
                             ]);
 
         //RETORNA SUCESSO
@@ -63,11 +63,11 @@ class Usuario_Comum{
 
     /**
      * Metodo responsavel por buscar um usuario com base em seu ID
-     * @param integer $id
+     * @param integer $email
      * @return Usuario_Comum
      */
-    public static function getUsuario($id){
-        return (new Database('usuario_comum'))->select('userC_matricula = '.$id)
+    public static function getUsuario($email){
+        return (new Database('usuario_comum'))->select('userC_email = '.$email)
                                         ->fetchObject(self::class);
     }
 }

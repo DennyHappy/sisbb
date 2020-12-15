@@ -15,6 +15,8 @@ if(!isset($_GET['id']) or !is_numeric($_GET['id'])){
 //CONSULTA RESERVA
 $obLivro = Livro::getLivro($_GET['id']);
 
+//echo "<pre>"; print_r($obLivro); echo "</pre>"; exit;
+
 //VALIDAÇÃO DA RESERVA
 if (!$obLivro instanceof Livro) {
     header('location: index.php?status=error');

@@ -9,7 +9,7 @@ session_start();
 //echo "<pre>"; print_r($_POST['ativo']); echo "</pre>"; exit;
 
 if (isset($_POST['ativo']) && isset($_POST['busca'])) {
-    $livros = Livro::getLivros($_POST['ativo'], NULL, NULL, '"%'.$_POST['busca'].'%"');
+    $livros = Livro::getLivros('lv_situacao = "disponivel" and '.$_POST['ativo'], NULL, NULL, '"%'.$_POST['busca'].'%"');
 }
 
 

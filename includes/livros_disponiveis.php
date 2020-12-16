@@ -20,12 +20,11 @@
                                         <i class="fs-6">Edição: </i><p class="card-text">'.$livro->lv_edicao.'</p>
                                         <i class="fs-6">Ano: </i><p class="card-text">'.$livro->lv_ano.'</p>
                                         <i class="fs-6">Volume: </i><p class="card-text">'.$livro->lv_volume.'</p>
-                                        <a href="#" class="btn btn-primary btn-sm">
+                                        <a href="add_carrinho.php?acao=add&id='.$livro->lv_cod_barras.'" class="btn btn-primary btn-sm">
                                         Add a reserva
                                             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                 <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
                                             </svg>
-                                            
                                         </a>
                                     </div>
                                     <div class="card-footer">
@@ -35,8 +34,8 @@
                             </div>';
         }
     }else{
-        $resultados .= '<div class="alert alert-success" role="alert">
-                            <h3>Nenhuma busca feita no momento!</h3>
+        $resultados .= '<div class="alert alert-warning" role="alert">
+                            <h5>Nenhuma busca feita no momento!</h5>
                         </div>';
     }
     

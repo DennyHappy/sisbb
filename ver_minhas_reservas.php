@@ -15,7 +15,7 @@ if(!isset($_GET['mtc'])){
 //CONSULTA RESERVAS
 $obReservas = Reserva::getReservas('rsv_matricula_userC='.$_GET['mtc'], null, null);
 
-include __DIR__.'/includes/header.php';
+include __DIR__.'/includes/header1.php';
 include __DIR__.'/includes/info_user.php';
 include __DIR__.'/includes/listagem_minhas_reservas.php';
 include __DIR__.'/includes/footer.php';

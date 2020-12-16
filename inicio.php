@@ -39,7 +39,7 @@ try {
                         <p>Sistema de Biblioteca para Agendamento de Empréstimos de Livros</p>
                         <hr class="my-4">
                     </div>
-                    <div class="alert alert-light mt-5 col-4 mx-auto" role="alert">';
+                    <div class="alert alert-light mt-5 col-7 mx-auto" role="alert">';
     
                     
     $obUser = Usuario_Comum::getUsuario('"'.$_SESSION['email'].'"');
@@ -50,7 +50,7 @@ try {
         if ($_SESSION['email'] == $obUser->userC_email && strpos($_SESSION['email'], '@gmail.com')){
         
             echo '
-                <h2 class="mt-3 text-secondary">Conta Encontrada</h2>
+                <h5 class="mt-3 text-secondary text-center">Conta Encontrada</h5>
                 <hr>
                 <div class="form-group">
                     <label>Seu Nome:</label>

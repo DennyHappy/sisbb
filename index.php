@@ -22,8 +22,8 @@
                 <p>Sistema de Biblioteca para Agendamento de Empréstimos de Livros</p>
                 <hr class="my-4">
             </div>
-            <div class="alert alert-light mt-5 text-center col-4 mx-auto" role="alert">
-                <h3>Fazer Login com:</h3>
+            <div class="alert alert-light mt-5 text-center col-6 mx-auto" role="alert">
+                <h5>Fazer Login com:</h5>
                 <hr>
                 <a href="inicio.php" class="btn btn-success btn-lg col-12">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-google" viewBox="0 0 16 16">

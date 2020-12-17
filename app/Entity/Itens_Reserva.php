@@ -26,6 +26,22 @@ class Itens_Reserva extends Reserva{
     public $it_rsv_cod_barra_livro;
 
     /**
+     * Metodo responsavel por cadastrar os itens da reserva no banco
+     * @return boolean
+     */
+    public function cadastrar(){
+        //INSERIR AGENDA NO BANCO
+        $obDatabase = new Database('item_reserva');
+        $this->it_rsv_codigo = $obDatabase->insert([
+                                'it_rsv_cod_reserva' => $this->it_rsv_cod_reserva,
+                                'it_rsv_cod_barra_livro'  => $this->it_rsv_cod_barra_livro,
+                            ]);
+
+        //RETORNA SUCESSO
+        return true;
+    }
+
+    /**
      * Metodo responsavel por obter os itens de reserva no banco de dados com base no ID da reserva ao qual pertence
      * @param string $where
      * @param string $order

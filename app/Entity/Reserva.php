@@ -26,6 +26,12 @@ class Reserva{
     public $rsv_data_reserva;
 
     /**
+     * Hora da reserva
+     * @var string
+     */
+    public $rsv_hora_reserva;
+
+    /**
      * Status da reserva
      * @var string (ativa/concluida)
      */
@@ -42,6 +48,24 @@ class Reserva{
      * @var integer
      */
     public $rsv_codigo_agenda;
+
+    /**
+     * Metodo responsavel por cadastrar uma nova reserva no banco
+     * @return boolean
+     */
+    public function cadastrar(){
+        //INSERIR RESERVA NO BANCO
+        $obDatabase = new Database('reserva');
+        $this->rsv_codigo = $obDatabase->insert([
+                                'rsv_data_reserva' => $this->rsv_data_reserva,
+                                'rsv_hora_reserva' => $this->rsv_hora_reserva,
+                                'rsv_matricula_userC' => $this->rsv_matricula_userC,
+                                'rsv_codigo_agenda' => $this->rsv_codigo_agenda
+                            ]);
+
+        //RETORNA SUCESSO
+        return true;
+    }
 
     /**
      * Metodo responsavel por atualizar a agenda no banco
@@ -66,12 +90,22 @@ class Reserva{
     }
 
     /**
-     * Metodo responsavel por buscar uma vaga com base em seu ID
+     * Metodo responsavel por buscar uma reserva com base em seu ID
      * @param integer $id
      * @return Agenda
      */
     public static function getReserva($id){
         return (new Database('reserva'))->select('rsv_codigo = '.$id)
+                                        ->fetchObject(self::class);
+    }
+
+    /**
+     * Metodo responsavel por buscar uma reserva com base na data e o horario escolhido para uma reserva
+     * @param integer $id
+     * @return Agenda
+     */
+    public static function getReserva_2($data,$hora){
+        return (new Database('reserva'))->select('rsv_data_reserva = '.$data.' and rsv_hora_reserva = '.$hora)
                                         ->fetchObject(self::class);
     }
 }

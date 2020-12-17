@@ -93,6 +93,8 @@ class Database{
         //MONTA QUERY
         $query = 'insert into '.$this->table.' ('.implode(',',$fields).') values ('.implode(',',$binds).')';
 
+        //echo "<pre>"; print_r($values); echo "</pre>";
+        //echo "<pre>"; print_r($query); echo "</pre>"; exit;
         //EXECUTA O INSERT
         $this->execute($query,array_values($values));
 

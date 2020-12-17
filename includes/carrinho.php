@@ -5,7 +5,7 @@
     <hr>
     <form action="?acao=up" method="post">
     <a href="view1.php" class="btn btn-primary btn-sm">Adicionar mais itens</a>
-    <a href="view1.php" class="btn btn-primary btn-sm end">proceguir</a>
+    <a href="ver_horarios.php" class="btn btn-primary btn-sm end">Prosseguir</a>
     <hr>
     <section style="overflow-x: scroll; overflow-y: hidden; white-space: nowrap;">
         <table class="table bg-white text-center">

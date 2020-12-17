@@ -46,6 +46,9 @@ if (count($_SESSION['carrinho']) == 0) {
                         </td>
                     </tr>';
 }else{
+
+    $_SESSION['dados'] = [];
+
     $resultados = '';
     foreach ($_SESSION['carrinho'] as $id => $qtd) {
         $obLivro = Livro::getLivro($id);
@@ -57,6 +60,10 @@ if (count($_SESSION['carrinho']) == 0) {
                             <td><a href="?acao=del&id='.$id.'" class="btn btn-primary btn-sm">Remover</a></td>
                         </tr>
         ';
+
+        array_push($_SESSION['dados'],[
+            'lv_cod_barras' => $obLivro->lv_cod_barras
+        ]);
     }
 }
 

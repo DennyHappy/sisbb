@@ -30,7 +30,7 @@ class Itens_Reserva extends Reserva{
      * @return boolean
      */
     public function cadastrar(){
-        //INSERIR AGENDA NO BANCO
+        //INSERIR ITEM DE RESERVA NO BANCO
         $obDatabase = new Database('item_reserva');
         $this->it_rsv_codigo = $obDatabase->insert([
                                 'it_rsv_cod_reserva' => $this->it_rsv_cod_reserva,

@@ -3,6 +3,8 @@
 require __DIR__.'/vendor/autoload.php';
 
 use \App\Entity\Reserva;
+use \App\Entity\Itens_Reserva;
+use \App\Entity\Livro;
 
 session_start();
 
@@ -24,6 +26,30 @@ if ($obReserva1 == NULL) {
         
         //echo "<pre>"; print_r($obReserva); echo "</pre>"; exit;
         $obReserva->cadastrar();
+        $codReserva = $obReserva->rsv_codigo;
+        //echo "<pre>"; print_r($codLivro); echo "</pre>"; exit;
+
+        if (isset($codReserva,$_SESSION['dados'])) {
+            foreach ($_SESSION['dados'] as $cod_livro) {
+                $obItReserva = new Itens_Reserva;
+                $obItReserva->it_rsv_cod_reserva = $codReserva;
+                $obItReserva->it_rsv_cod_barra_livro = $cod_livro['lv_cod_barras'];
+
+                //echo "<pre>"; print_r($obItReserva); echo "</pre>"; exit;
+                $obItReserva->cadastrar();
+
+                //CONSULTA LIVRO
+                $obLivro = Livro::getLivro($cod_livro['lv_cod_barras']);
+
+                //echo "<pre>"; print_r($obLivro); echo "</pre>"; exit;
+
+                //VALIDAÇÃO DO LIVRO
+                if ($obLivro instanceof Livro) {
+                    $obLivro->lv_situacao = 'emprestado';
+                    $obLivro->atualizar_situacao();
+                }
+            }
+        }
 
         header('location: ver_minhas_reservas.php?mtc='.$_SESSION['matricula'].'&status=success');
         exit;

@@ -79,6 +79,16 @@ class Livro extends Itens_Reserva{
     }
 
     /**
+     * Metodo responsavel por atualizar o situação livro no banco
+     * @return boolean
+     */
+    public function atualizar_situacao(){
+        return (new Database('livro'))->update('lv_cod_barras = '.$this->lv_cod_barras,[
+                                                                            'lv_situacao' => $this->lv_situacao
+                                                                        ]);
+    }
+
+    /**
      * Metodo responsavel por obter os Livros no banco de dados
      * @param string $where
      * @param string $join

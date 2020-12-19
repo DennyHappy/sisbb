@@ -62,7 +62,7 @@ class Reserva{
                                 'rsv_matricula_userC' => $this->rsv_matricula_userC,
                                 'rsv_codigo_agenda' => $this->rsv_codigo_agenda
                             ]);
-
+        //echo "<pre>"; print_r($this); echo "</pre>"; exit;
         //RETORNA SUCESSO
         return true;
     }

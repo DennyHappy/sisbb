@@ -12,12 +12,12 @@ if(!isset($_GET['id']) or !is_numeric($_GET['id'])){
     exit;
 }
 
-//CONSULTA RESERVA
+//CONSULTA LIVRO
 $obLivro = Livro::getLivro($_GET['id']);
 
 //echo "<pre>"; print_r($obLivro); echo "</pre>"; exit;
 
-//VALIDAÇÃO DA RESERVA
+//VALIDAÇÃO DO LIVRO
 if (!$obLivro instanceof Livro) {
     header('location: index.php?status=error');
     exit;
@@ -38,6 +38,8 @@ if(isset($_POST['lv_situacao_atual']) && isset($_POST['lv_situacao']) && isset($
         $obLivro->lv_situacao = $_POST['lv_situacao'];
         $obLivro->lv_data_quarentena = NULL;//$_POST['lv_data_quarentena'];
         $obLivro->atualizar();
+
+        echo "<pre>"; print_r($obLivro); echo "</pre>"; exit;
 
     }
     

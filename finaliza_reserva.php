@@ -48,7 +48,22 @@ if ($obReserva1 == NULL) {
                     $obLivro->lv_situacao = 'emprestado';
                     $obLivro->atualizar_situacao();
                 }
+
+                /*if (isset($_SESSION['carrinho'],$_SESSION['dados'])) {
+
+                    $cont = count($_SESSION['dados']);
+                    //echo "<pre>"; print_r($cont); echo "</pre>"; exit;
+                    for ($i=0; $i < $cont; $i++) { 
+                        unset($_SESSION['carrinho']['lv_cod_barras']);
+                        unset($_SESSION['dados'][$i]);
+                    }
+                }*/
+
+                $_SESSION['carrinho'] = [];
+                $_SESSION['dados'] = [];
+                
             }
+
         }
 
         header('location: ver_minhas_reservas.php?mtc='.$_SESSION['matricula'].'&status=success');

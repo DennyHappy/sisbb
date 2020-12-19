@@ -1,5 +1,18 @@
 <?php
 
+    $mensagem = '';
+    if (isset($_GET['status'])) {
+        switch ($_GET['status']) {
+            case 'success':
+                $mensagem = '<div class="alert alert-success"><h5>Reserva Cadastrada com Sucesso!</h5></div>';
+                break;
+            
+            case 'error':
+                $mensagem = '<div class="alert alert-danger"><h5>Problemas ao Cadastrar a Reserva!</h5></div>';
+                break;
+        }
+    }
+
     $resultados = '';
     foreach ($obReservas as $reserva) {
         $resultados .= '<tr>

@@ -31,6 +31,9 @@ if (isset($_GET['acao'])) {
         if (isset($_SESSION['carrinho'][$id])) {
             unset($_SESSION['carrinho'][$id]);
         }
+        if (!empty($_SESSION['dados'][0])) {
+            unset($_SESSION['dados'][0]);
+        }
     }
 }
 

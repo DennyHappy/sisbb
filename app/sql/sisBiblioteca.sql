@@ -381,13 +381,13 @@ INSERT INTO livro (lv_cod_barras, lv_patrimonio, lv_localizacao, lv_titulo, lv_a
 	VALUES (215252, 385305, '001.1 A474f', 'Filosofia da ciência : introdução ao jogo e a suas regras', 'Alves, Rubem', '19. ed.', '2015', '', 'disponivel', NULL);
 
 INSERT INTO livro (lv_cod_barras, lv_patrimonio, lv_localizacao, lv_titulo, lv_autor, lv_edicao, lv_ano, lv_volume, lv_situacao, lv_data_quarentena) 
-	VALUES (201533, 371378, '001.8 B277f', 'Fundamentos de metodologia científica', 'Barros, Aidil Jesus da Silveira', '3. ed.', 'c2008', '', 'emprestado', NULL);
+	VALUES (201533, 371378, '001.8 B277f', 'Fundamentos de metodologia científica', 'Barros, Aidil Jesus da Silveira', '3. ed.', 'c2008', '', 'disponivel', NULL);
 
 INSERT INTO livro (lv_cod_barras, lv_patrimonio, lv_localizacao, lv_titulo, lv_autor, lv_edicao, lv_ano, lv_volume, lv_situacao, lv_data_quarentena) 
-	VALUES (237502, 407522, '001.8 G463c', 'Como elaborar projetos de pesquisa', 'Gil, Antonio Carlos', '6. ed.', '2017', '', 'emprestado', NULL);
+	VALUES (237502, 407522, '001.8 G463c', 'Como elaborar projetos de pesquisa', 'Gil, Antonio Carlos', '6. ed.', '2017', '', 'disponivel', NULL);
 
 INSERT INTO livro (lv_cod_barras, lv_patrimonio, lv_localizacao, lv_titulo, lv_autor, lv_edicao, lv_ano, lv_volume, lv_situacao, lv_data_quarentena) 
-	VALUES (200721, 368853, '001.8 L412c', 'A construção do saber : manual de metodologia da pesquisa em ciências humanas', 'Laville, Christian', '', '1999', '', 'quarentena', NOW());
+	VALUES (200721, 368853, '001.8 L412c', 'A construção do saber : manual de metodologia da pesquisa em ciências humanas', 'Laville, Christian', '', '1999', '', 'disponivel', NULL);
 
 INSERT INTO usuario_comum (userC_matricula, userC_nome, userC_email, userC_idUser) 
 	VALUES ('20171134040027', 'Denilson Felisberto', 'denilsonfelisberto.18.digi@gmail.com', '113293830749542802484');

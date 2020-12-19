@@ -4,11 +4,21 @@
     if (isset($_GET['status'])) {
         switch ($_GET['status']) {
             case 'success':
-                $mensagem = '<div class="alert alert-success"><h5>Reserva Cadastrada com Sucesso!</h5></div>';
+                $mensagem = '<div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+                <strong>Reserva cadastrada com sucesso!</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>';
                 break;
             
             case 'error':
-                $mensagem = '<div class="alert alert-danger"><h5>Problemas ao Cadastrar a Reserva!</h5></div>';
+                $mensagem = '<div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+                <strong>Problemas ao cadastrar a reserva!</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>';
                 break;
         }
     }
@@ -32,6 +42,7 @@
 
 ?>
 <main>
+    <?=$mensagem?>  
 
     <section>
         <a href="view1.php" class="btn btn-primary">

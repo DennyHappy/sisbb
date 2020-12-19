@@ -12,12 +12,7 @@
                     <a href="add_carrinho.php" class="btn btn-info btn-sm active">
                         Itens no Carrinho 
                         <span class="badge badge-light">
-                            <?php 
-                            if(!empty($_SESSION['dados'])) {
-                                echo "<pre>"; print_r($_SESSION['carrinho']); echo "</pre>";
-                                echo "<pre>"; print_r($_SESSION['dados']); echo "</pre>";
-                            }
-                            ?>
+                            <?=(!empty($_SESSION['dados']) ? count($_SESSION['carrinho']) : '0')?>
                         </span>
                     </a>
                     <a href="ver_minhas_reservas.php?mtc=<?=$_SESSION['matricula']?>" class="btn btn-info btn-sm">Minhas Reservas</a>

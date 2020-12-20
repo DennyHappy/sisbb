@@ -374,6 +374,9 @@ CREATE TRIGGER delete_item_reserva
 
 /* Fim auditoria item_reserva */
 
+INSERT INTO agenda (agd_data, agd_hora_ini, agd_hora_fin) 
+	VALUES ('2020-11-29', '09:30', '10:30');
+
 INSERT INTO livro (lv_cod_barras, lv_patrimonio, lv_localizacao, lv_titulo, lv_autor, lv_edicao, lv_ano, lv_volume, lv_situacao, lv_data_quarentena) 
 	VALUES (215252, 385305, '001.1 A474f', 'Filosofia da ciência : introdução ao jogo e a suas regras', 'Alves, Rubem', '19. ed.', '2015', '', 'disponivel', NULL);
 

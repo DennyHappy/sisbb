@@ -2,9 +2,9 @@
 
 require __DIR__.'/vendor/autoload.php';
 
-//echo "<pre>"; print_r($_POST); echo "</pre>"; exit;
-
 use \App\Entity\Livro;
+
+session_start();
 
 //VALIDAÇÃO DO ID
 if(!isset($_GET['id']) or !is_numeric($_GET['id'])){
@@ -50,6 +50,7 @@ if(isset($_POST['lv_situacao_atual']) && isset($_POST['lv_situacao']) && isset($
 }
 
 include __DIR__.'/includes/header.php';
+include __DIR__.'/includes/info_user_adm.php';
 include __DIR__.'/includes/alterar_livro.php';
 include __DIR__.'/includes/footer.php';
 

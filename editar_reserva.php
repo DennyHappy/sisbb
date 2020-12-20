@@ -2,9 +2,9 @@
 
 require __DIR__.'/vendor/autoload.php';
 
-//echo "<pre>"; print_r($_POST); echo "</pre>"; exit;
-
 use \App\Entity\Reserva;
+
+session_start();
 
 //VALIDAÇÃO DO ID
 if(!isset($_GET['id']) or !is_numeric($_GET['id'])){
@@ -34,6 +34,7 @@ if(isset($_POST['rsv_status_reserva']) && isset($_POST['rsv_codigo'])){
 }
 
 include __DIR__.'/includes/header.php';
+include __DIR__.'/includes/info_user_adm.php';
 include __DIR__.'/includes/alterar_reserva.php';
 include __DIR__.'/includes/footer.php';
 

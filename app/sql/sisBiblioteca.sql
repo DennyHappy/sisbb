@@ -388,7 +388,10 @@ INSERT INTO livro (lv_cod_barras, lv_patrimonio, lv_localizacao, lv_titulo, lv_a
 
 INSERT INTO livro (lv_cod_barras, lv_patrimonio, lv_localizacao, lv_titulo, lv_autor, lv_edicao, lv_ano, lv_volume, lv_situacao, lv_data_quarentena) 
 	VALUES (200721, 368853, '001.8 L412c', 'A construção do saber : manual de metodologia da pesquisa em ciências humanas', 'Laville, Christian', '', '1999', '', 'disponivel', NULL);
+    
+INSERT INTO usuario_bibliotecario (userB_matricula, userB_nome, userB_email, userB_idUser) 
+	VALUES ('20200101', 'Denilson Felisberto', 'denilsonfelisberto.19.digi@gmail.com', '116669301135508743222');
 
 INSERT INTO usuario_comum (userC_matricula, userC_nome, userC_email, userC_idUser) 
-	VALUES ('20171134040027', 'Denilson Felisberto', 'denilsonfelisberto.18.digi@gmail.com', '113293830749542802484');
+	VALUES ('20171134040027', 'Denilson Felisberto de Medeiros', 'f.denilson@escolar.ifrn.edu.br', '107763917627751515047');
     

@@ -4,6 +4,8 @@ require __DIR__.'/vendor/autoload.php';
 
 use \App\Entity\Livro;
 
+session_start();
+
 //VALIDAÇÃO DA SITUAÇÃO
 if(!isset($_GET['situacao'])){
     header('location: index.php?status=error');
@@ -27,6 +29,7 @@ if ($_GET['situacao'] == 'disponivel') {
 //echo "<pre>"; print_r($livros); echo "</pre>"; exit;
 
 include __DIR__.'/includes/header.php';
+include __DIR__.'/includes/info_user_adm.php';
 include __DIR__.'/includes/listagem_livros.php';
 include __DIR__.'/includes/footer.php';
 

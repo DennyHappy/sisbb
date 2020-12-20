@@ -4,6 +4,8 @@ include __DIR__.'/vendor/autoload.php';
 
 use \App\Entity\Agenda;
 
+session_start();
+
 //VALIDAÇÃO DO ID
 if(!isset($_GET['id']) or !is_numeric($_GET['id'])){
     header('location: view2.php?status=errorExclusao');
@@ -33,6 +35,7 @@ if(isset($_POST['excluir'])){
 //echo "<pre>"; print_r($_POST); echo "</pre>"; exit;
 
 include __DIR__.'/includes/header.php';
+include __DIR__.'/includes/info_user_adm.php';
 include __DIR__.'/includes/confirmar_exclusao_agenda.php';
 include __DIR__.'/includes/footer.php';
 

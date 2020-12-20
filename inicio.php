@@ -2,6 +2,7 @@
 require_once 'config.php';
 
 use \App\Entity\Usuario_Comum;
+use \App\Entity\Usuario_Bibliotecario;
 
 try {
 
@@ -43,6 +44,7 @@ try {
     
                     
     $obUser = Usuario_Comum::getUsuario('"'.$_SESSION['email'].'"');
+    $obUser2 = Usuario_Bibliotecario::getUsuario('"'.$_SESSION['email'].'"');
 
     //echo "<pre>"; print_r($obUser); echo "</pre>"; exit;
 
@@ -50,10 +52,10 @@ try {
 
         $_SESSION['matricula'] = $obUser->userC_matricula;
 
-        if ($_SESSION['email'] == $obUser->userC_email && strpos($_SESSION['email'], '@gmail.com')){
+        if ($_SESSION['email'] == $obUser->userC_email && strpos($_SESSION['email'], '@escolar.ifrn.edu.br')){
 
             echo '
-                <h5 class="mt-3 text-secondary text-center">Conta Encontrada</h5>
+                <h5 class="mt-3 text-secondary text-center">Conta Encontrada - Aluno</h5>
                 <hr>
                 <div class="form-group">
                     <label>Seu Nome:</label>
@@ -73,8 +75,36 @@ try {
                 </div>
             ';
         }
+        
+    }elseif (is_object($obUser2)) {
+        
+        $_SESSION['matricula'] = $obUser2->userB_matricula;
+
+        if ($_SESSION['email'] == $obUser2->userB_email && $_SESSION['email'] == 'denilsonfelisberto.19.digi@gmail.com') {
+            echo '
+                <h5 class="mt-3 text-secondary text-center">Conta Encontrada - Bibliotecário</h5>
+                <hr>
+                <div class="form-group">
+                    <label>Seu Nome:</label>
+                    <input type="text" class="form-control" name="userC_nome" value="'.$_SESSION['nome'].'" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Seu E-mail:</label>
+                    <input type="text" class="form-control" name="userC_email" value="'.$_SESSION['email'].'" readonly>
+                </div>
+                <div class="form-group">
+                    <a href="view2.php" class="btn btn-success col-12">
+                        Entrar
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-right-square-fill" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.879 10.828a.5.5 0 1 1-.707-.707l4.096-4.096H6.5a.5.5 0 0 1 0-1h3.975a.5.5 0 0 1 .5.5V9.5a.5.5 0 0 1-1 0V6.732l-4.096 4.096z"/>
+                        </svg>
+                    </a>
+                </div>
+            ';
+        }
+
     }else{
-        if ($obUser == NULL && strpos($_SESSION['email'], '@gmail.com')) {
+        if ($obUser == NULL && strpos($_SESSION['email'], '@escolar.ifrn.edu.br')) {
             echo '
                 <h2 class="mt-3 text-secondary">Cadastro de Usúario</h2>
                 <hr>
@@ -112,12 +142,15 @@ try {
                 $obUser->userC_nome = $_POST['userC_nome'];
                 $obUser->userC_email = $_POST['userC_email'];
                 $obUser->userC_idUser = $_POST['userC_idUser'];
+
+                $_SESSION['matricula'] = $_POST['userC_matricula'];
+
                 $obUser->cadastrar();
             
                 header('location: view1.php?status=success');
                 exit;
             }
-        }elseif ($obUser == NULL && !strpos($_SESSION['email'], '@gmail.com')) {
+        }elseif ($obUser == NULL && !strpos($_SESSION['email'], '@escolar.ifrn.edu.br')) {
             $adapter->disconnect();
 
             session_unset();

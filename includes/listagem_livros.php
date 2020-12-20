@@ -1,4 +1,26 @@
 <?php
+    $mensagem = '';
+    if (isset($_GET['status'])) {
+        switch ($_GET['status']) {
+            case 'successEditarLvr':
+                $mensagem = '<div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+                                <strong>Alteração feita com sucesso!</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>';
+                break;
+            
+            case 'errorEditarLvr':
+                $mensagem = '<div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+                                <strong>Problemas ao editar livro!</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>';
+                break;
+        }
+    }
 
     $resultados = '';
     foreach ($livros as $livro) {
@@ -39,8 +61,10 @@
 
 ?>
 <main>
+    <?=$mensagem?> 
+
     <section class="text-center">
-        <a href="index.php" class="btn btn-primary mb-3">
+        <a href="view2.php" class="btn btn-primary mb-3">
             Agendas 
             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calendar-week" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>

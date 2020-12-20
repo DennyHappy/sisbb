@@ -1,4 +1,27 @@
 <?php
+    $mensagem = '';
+    if (isset($_GET['status'])) {
+        switch ($_GET['status']) {
+            
+            case 'successEditarRsv':
+                $mensagem = '<div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+                                <strong>Alteração feita com sucesso!</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>';
+                break;
+            
+            case 'errorEditarRsv':
+                $mensagem = '<div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+                                <strong>Problemas ao editar a reserva!</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>';
+                break;
+        }
+    }
 
     $resultados = '';
     foreach ($obReservas as $reserva) {
@@ -22,6 +45,7 @@
 
 ?>
 <main>
+<?=$mensagem?>
 
     <section>
         <a href="index.php" class="btn btn-primary">

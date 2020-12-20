@@ -66,14 +66,14 @@ if ($obReserva1 == NULL) {
 
         }
 
-        header('location: ver_minhas_reservas.php?mtc='.$_SESSION['matricula'].'&status=success');
+        header('location: ver_minhas_reservas.php?mtc='.$_SESSION['matricula'].'&status=successCadastroRsv');
         exit;
     }else{
-        header('location: ver_horarios.php?status=error');
+        header('location: ver_horarios.php?status=errorCadastroRsv');
         exit;
     }
 }else{
-    header('location: ver_horarios.php?status=error');
+    header('location: ver_horarios.php?status=errorCadastroRsv');
     exit;
 }
 

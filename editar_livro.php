@@ -8,7 +8,7 @@ use \App\Entity\Livro;
 
 //VALIDAÇÃO DO ID
 if(!isset($_GET['id']) or !is_numeric($_GET['id'])){
-    header('location: index.php?status=error');
+    header('location: index.php?status=errorEditarLvr');
     exit;
 }
 
@@ -19,7 +19,7 @@ $obLivro = Livro::getLivro($_GET['id']);
 
 //VALIDAÇÃO DO LIVRO
 if (!$obLivro instanceof Livro) {
-    header('location: index.php?status=error');
+    header('location: index.php?status=errorEditarLvr');
     exit;
 }
 
@@ -39,12 +39,12 @@ if(isset($_POST['lv_situacao_atual']) && isset($_POST['lv_situacao']) && isset($
         $obLivro->lv_data_quarentena = NULL;//$_POST['lv_data_quarentena'];
         $obLivro->atualizar();
 
-        echo "<pre>"; print_r($obLivro); echo "</pre>"; exit;
+        //echo "<pre>"; print_r($obLivro); echo "</pre>"; exit;
 
     }
     
     
-    header('location: ver_livros.php?situacao='.$_POST['lv_situacao'].'&?status=success');
+    header('location: ver_livros.php?situacao='.$_POST['lv_situacao'].'&status=successEditarLvr');
     exit;
 
 }

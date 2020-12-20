@@ -16,7 +16,10 @@ if (isset($_POST['agd_data'],$_POST['agd_hora_ini'],$_POST['agd_hora_fin'])) {
     $obAgenda->agd_hora_fin = $_POST['agd_hora_fin'];
     $obAgenda->cadastrar();
 
-    header('location: index.php?status=success');
+    header('location: view2.php?status=successCadastro');
+    exit;
+}else{
+    header('location: view2.php?status=errorCadastro');
     exit;
 }
 

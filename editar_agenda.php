@@ -10,7 +10,7 @@ use \App\Entity\Agenda;
 
 //VALIDAÇÃO DO ID
 if(!isset($_GET['id']) or !is_numeric($_GET['id'])){
-    header('location: index.php?status=error');
+    header('location: view2.php?status=errorEditar');
     exit;
 }
 
@@ -19,7 +19,7 @@ $obAgenda = Agenda::getAgenda($_GET['id']);
 
 //VALIDAÇÃO A AGENDA
 if (!$obAgenda instanceof Agenda) {
-    header('location: index.php?status=error');
+    header('location: view2.php?status=errorEditar');
     exit;
 }
 
@@ -33,7 +33,7 @@ if (isset($_POST['agd_data'],$_POST['agd_hora_ini'],$_POST['agd_hora_fin'])) {
     $obAgenda->atualizar();
 
     //echo "<pre>"; print_r($obAgenda); echo "</pre>"; exit;
-    header('location: index.php?status=success');
+    header('location: view2.php?status=successEditar');
     exit;
 }
 

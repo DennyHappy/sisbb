@@ -3,22 +3,13 @@
     $mensagem = '';
     if (isset($_GET['status'])) {
         switch ($_GET['status']) {
-            case 'success':
+            case 'successCadastroRsv':
                 $mensagem = '<div class="alert alert-success alert-dismissible fade show text-center" role="alert">
-                <strong>Reserva cadastrada com sucesso!</strong>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>';
-                break;
-            
-            case 'error':
-                $mensagem = '<div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
-                <strong>Problemas ao cadastrar a reserva!</strong>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>';
+                                <strong>Reserva cadastrada com sucesso!</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>';
                 break;
         }
     }

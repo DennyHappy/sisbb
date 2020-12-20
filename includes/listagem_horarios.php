@@ -1,5 +1,20 @@
 <?php
 
+    $mensagem = '';
+    if (isset($_GET['status'])) {
+        switch ($_GET['status']) {
+            
+            case 'errorCadastroRsv':
+                $mensagem = '<div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+                                <strong>Problemas ao cadastrar a reserva! <br>Horário já ocupado! <br>Escolha outro horário!</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>';
+                break;
+        }
+    }
+
     $resultados = '';
     foreach ($agendas as $agenda) {
         $resultados .= '<div class="card">
@@ -62,6 +77,7 @@
 
 ?>
 <main>
+    <?=$mensagem?>  
 
     <h2 class="mt-3 text-secondary">Dias Disponíveis</h2>
     <hr>

@@ -6,7 +6,7 @@ use \App\Entity\Agenda;
 
 //VALIDAÇÃO DO ID
 if(!isset($_GET['id']) or !is_numeric($_GET['id'])){
-    header('location: index.php?status=error');
+    header('location: view2.php?status=errorExclusao');
     exit;
 }
 
@@ -15,7 +15,7 @@ $obAgenda = Agenda::getAgenda($_GET['id']);
 
 //VALIDAÇÃO DA AGENDA
 if(!$obAgenda instanceof Agenda){
-    header('location: index.php?status=error');
+    header('location: view2.php?status=errorExclusao');
     exit;
 }
 
@@ -25,7 +25,7 @@ if(isset($_POST['excluir'])){
 
     $obAgenda->excluir();
     
-    header('Location: index.php?status=success');
+    header('Location: view2.php?status=successExclusao');
     exit;
 
 }

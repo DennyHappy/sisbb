@@ -3,7 +3,7 @@
 include __DIR__.'/vendor/autoload.php';
 
 $config = [
-    'callback' => 'http://localhost/sisbb/inicio.php',
+    'callback' => 'http://sisbb.brazilsouth.cloudapp.azure.com/inicio.php',
     'keys'     => [
                     'id' => '895552023784-qon8skp6p3e55u1du93o4qlneid9i5dk.apps.googleusercontent.com',
                     'secret' => '-kOUXG16fWgsn0VG2Yet2WNZ'

@@ -11,6 +11,15 @@
                                 </button>
                             </div>';
                 break;
+            
+            case 'successReagendaRsv':
+                $mensagem = '<div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+                                <strong>Reserva Reagendada com sucesso!</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>';
+                break;
         }
     }
 
@@ -27,6 +36,20 @@
                                 <a class="btn btn-secondary btn-sm" href="ver_itens.php?id='.$reserva->rsv_codigo.'">
                                     Ver itens
                                 </a>
+                                ';
+                                $dataRsv = $reserva->rsv_data_reserva;
+                                $dataAtl = date('Y-m-d');
+                                
+                                //echo 'Rsv'.$dataRsv.'Atl'.$dataAtl;
+                                if ($dataRsv < $dataAtl) {
+                                    $resultados .= '
+                                    <a class="btn btn-danger btn-sm" href="ver_horarios.php?codRsv='.$reserva->rsv_codigo.'">
+                                        Reagendar
+                                    </a>
+                                    ';
+                                }
+                                
+        $resultados .= '
                             </td>
                         </tr>';
     }

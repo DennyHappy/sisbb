@@ -57,11 +57,11 @@ class Reserva{
         //INSERIR RESERVA NO BANCO
         $obDatabase = new Database('reserva');
         $this->rsv_codigo = $obDatabase->insert([
-                                'rsv_data_reserva' => $this->rsv_data_reserva,
-                                'rsv_hora_reserva' => $this->rsv_hora_reserva,
-                                'rsv_matricula_userC' => $this->rsv_matricula_userC,
-                                'rsv_codigo_agenda' => $this->rsv_codigo_agenda
-                            ]);
+                                                    'rsv_data_reserva' => $this->rsv_data_reserva,
+                                                    'rsv_hora_reserva' => $this->rsv_hora_reserva,
+                                                    'rsv_matricula_userC' => $this->rsv_matricula_userC,
+                                                    'rsv_codigo_agenda' => $this->rsv_codigo_agenda
+                                                ]);
         //echo "<pre>"; print_r($this); echo "</pre>"; exit;
         //RETORNA SUCESSO
         return true;
@@ -75,6 +75,18 @@ class Reserva{
         return (new Database('reserva'))->update('rsv_codigo = '.$this->rsv_codigo,[
                                                                             'rsv_status_reserva' => $this->rsv_status_reserva
                                                                         ]);
+    }
+
+    /**
+     * Metodo responsavel por reagendar a agenda no banco
+     * @return boolean
+     */
+    public function reagenda(){
+        return (new Database('reserva'))->update('rsv_codigo = '.$this->rsv_codigo,[
+                                                                                        'rsv_data_reserva' => $this->rsv_data_reserva,
+                                                                                        'rsv_hora_reserva' => $this->rsv_hora_reserva,
+                                                                                        'rsv_codigo_agenda' => $this->rsv_codigo_agenda
+                                                                                    ]);
     }
 
     /**

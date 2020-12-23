@@ -12,13 +12,30 @@
                                 </button>
                             </div>';
                 break;
+
+            case 'errorReagendaRsv':
+                $mensagem = '<div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+                                <strong>Problemas ao reagendar a reserva! <br>Horário já ocupado! <br>Escolha outro horário!</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>';
+                break;
         }
     }
 
     $resultados = '';
     foreach ($agendas as $agenda) {
-        $resultados .= '<div class="card">
-                            <form action="finaliza_reserva.php?hora=ativo'.$agenda->agd_codigo.'" method="post">
+        $resultados .= '<div class="card">';
+                        if (isset($_GET['codRsv'])) {
+                            $resultados .= '<form action="reagendar.php?hora=ativo'.$agenda->agd_codigo.'" method="post">
+                                                <input type="hidden" name="rsv_codigo" value="'.$_GET['codRsv'].'">
+                                            ';
+                        }else{
+                            $resultados .= '<form action="finaliza_reserva.php?hora=ativo'.$agenda->agd_codigo.'" method="post">';
+                        }
+
+        $resultados .= '
                             <div class="card-header" id="heading'.$agenda->agd_codigo.'">
                                 <div class="row">
                                     <div class="col-9">

@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__.'/vendor/autoload.php';
+require __DIR__.'/../vendor/autoload.php';
 
 use \App\Entity\Reserva;
 use \App\Entity\Itens_Reserva;
@@ -76,7 +76,3 @@ if ($obReserva1 == NULL) {
     header('location: ver_horarios.php?status=errorCadastroRsv');
     exit;
 }
-
-//if (isset($_POST[$param],$_POST['data'])) {
-//    echo "<pre>"; print_r($_SESSION['dados']); echo "</pre>"; exit;
-//}

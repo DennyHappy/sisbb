@@ -75,8 +75,8 @@ class Agenda{
      * @param string $limit
      * @return array
      */
-    public static function getAgendas($where = null, $order = null, $limit = null, $join = null, $and = null, $or = null){
-        return (new Database('agenda'))->select($where,$order,$limit)
+    public static function getAgendas($where = null){
+        return (new Database('agenda'))->select($where)
                                         ->fetchAll(PDO::FETCH_CLASS,self::class);
     }
 

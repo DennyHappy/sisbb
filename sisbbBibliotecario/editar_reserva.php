@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__.'/vendor/autoload.php';
+require __DIR__.'/../vendor/autoload.php';
 
 use \App\Entity\Reserva;
 
@@ -33,8 +33,12 @@ if(isset($_POST['rsv_status_reserva']) && isset($_POST['rsv_codigo'])){
 
 }
 
-include __DIR__.'/includes/header.php';
-include __DIR__.'/includes/info_user_adm.php';
-include __DIR__.'/includes/alterar_reserva.php';
-include __DIR__.'/includes/footer.php';
-
+if (isset($_SESSION['email'])) {
+    include __DIR__.'/../includes/header.php';
+    include __DIR__.'/../includes/info_user_adm.php';
+    include __DIR__.'/../includes/alterar_reserva.php';
+    include __DIR__.'/../includes/footer.php';
+}else{
+    header('location: ../index.php?status=errorAcesso');
+    exit;
+}

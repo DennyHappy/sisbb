@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__.'/vendor/autoload.php';
+require __DIR__.'/../vendor/autoload.php';
 
 use \App\Entity\Livro;
 
@@ -24,12 +24,14 @@ if ($_GET['situacao'] == 'disponivel') {
     $livros = Livro::getLivros('lv_situacao = '.'"'.$_GET['situacao'].'"');
 }
 
-
-
 //echo "<pre>"; print_r($livros); echo "</pre>"; exit;
 
-include __DIR__.'/includes/header.php';
-include __DIR__.'/includes/info_user_adm.php';
-include __DIR__.'/includes/listagem_livros.php';
-include __DIR__.'/includes/footer.php';
-
+if (isset($_SESSION['email'])) {
+    include __DIR__.'/../includes/header.php';
+    include __DIR__.'/../includes/info_user_adm.php';
+    include __DIR__.'/../includes/listagem_livros.php';
+    include __DIR__.'/../includes/footer.php';
+}else{
+    header('location: ../index.php?status=errorAcesso');
+    exit;
+}

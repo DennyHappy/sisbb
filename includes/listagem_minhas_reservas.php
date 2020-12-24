@@ -33,7 +33,7 @@
                             <td class="text-center">'.$reserva->rsv_matricula_userC.'</td>
                             <td class="text-center">'.($reserva->rsv_status_reserva == 'ativa' ? '<span class=" btn btn-warning btn-sm">Ativa</span>' : '<span class="btn btn-success btn-sm">Concluida</span>').'</td>
                             <td class="text-center">
-                                <a class="btn btn-secondary btn-sm" href="ver_itens.php?id='.$reserva->rsv_codigo.'">
+                                <a class="btn btn-secondary btn-sm" href="../sisbbBibliotecario/ver_itens.php?id='.$reserva->rsv_codigo.'">
                                     Ver itens
                                 </a>
                                 ';

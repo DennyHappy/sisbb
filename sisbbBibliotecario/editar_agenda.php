@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__.'/vendor/autoload.php';
+require __DIR__.'/../vendor/autoload.php';
 
 //echo "<pre>"; print_r($_POST); echo "</pre>"; exit;
 
@@ -21,7 +21,7 @@ $obAgenda = Agenda::getAgenda($_GET['id']);
 
 //VALIDAÇÃO A AGENDA
 if (!$obAgenda instanceof Agenda) {
-    header('location: view2.php?status=errorEditar');
+    header('location: index.php?status=errorEditar');
     exit;
 }
 
@@ -35,12 +35,17 @@ if (isset($_POST['agd_data'],$_POST['agd_hora_ini'],$_POST['agd_hora_fin'])) {
     $obAgenda->atualizar();
 
     //echo "<pre>"; print_r($obAgenda); echo "</pre>"; exit;
-    header('location: view2.php?status=successEditar');
+    header('location: index.php?status=successEditar');
     exit;
 }
 
-include __DIR__.'/includes/header.php';
-include __DIR__.'/includes/info_user_adm.php';
-include __DIR__.'/includes/formulario_agenda.php';
-include __DIR__.'/includes/footer.php';
+if (isset($_SESSION['email'])) {
+    include __DIR__.'/../includes/header.php';
+    include __DIR__.'/../includes/info_user_adm.php';
+    include __DIR__.'/../includes/formulario_agenda.php';
+    include __DIR__.'/../includes/footer.php';
+}else{
+    header('location: ../index.php?status=errorAcesso');
+    exit;
+}
 

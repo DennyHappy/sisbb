@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__.'/vendor/autoload.php';
+require __DIR__.'/../vendor/autoload.php';
 
 use \App\Entity\Livro;
 
@@ -70,8 +70,12 @@ if (count($_SESSION['carrinho']) == 0) {
     }
 }
 
-
-include __DIR__.'/includes/header1.php';
-include __DIR__.'/includes/info_user.php';
-include __DIR__.'/includes/carrinho.php';
-include __DIR__.'/includes/footer.php';
+if (isset($_SESSION['email'])) {
+    include __DIR__.'/../includes/header1.php';
+    include __DIR__.'/../includes/info_user.php';
+    include __DIR__.'/../includes/carrinho.php';
+    include __DIR__.'/../includes/footer.php';
+}else{
+    header('location: ../index.php?status=errorAcesso');
+    exit;
+}

@@ -1,5 +1,19 @@
 <?php
 
+    $mensagem = '';
+    if (isset($_GET['status'])) {
+        switch ($_GET['status']) {
+            case 'successCadastroUser':
+                $mensagem = '<div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+                                <strong>Usuário cadastrado com sucesso!</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>';
+                break;
+        }
+    }
+
     $resultados = '';
     if (isset($livros)) {
         foreach ($livros as $livro) {
@@ -42,6 +56,8 @@
 ?>
 
 <main>
+    <?=$mensagem?> 
+
     <h2 class="mt-3 text-secondary">Campo de busca</h2>
     <hr>
     <form method="post">

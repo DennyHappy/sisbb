@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__.'/vendor/autoload.php';
+require __DIR__.'/../vendor/autoload.php';
 
 use \App\Entity\Livro;
 
@@ -49,8 +49,12 @@ if(isset($_POST['lv_situacao_atual']) && isset($_POST['lv_situacao']) && isset($
 
 }
 
-include __DIR__.'/includes/header.php';
-include __DIR__.'/includes/info_user_adm.php';
-include __DIR__.'/includes/alterar_livro.php';
-include __DIR__.'/includes/footer.php';
-
+if (isset($_SESSION['email'])) {
+    include __DIR__.'/../includes/header.php';
+    include __DIR__.'/../includes/info_user_adm.php';
+    include __DIR__.'/../includes/alterar_livro.php';
+    include __DIR__.'/../includes/footer.php';
+}else{
+    header('location: ../index.php?status=errorAcesso');
+    exit;
+}

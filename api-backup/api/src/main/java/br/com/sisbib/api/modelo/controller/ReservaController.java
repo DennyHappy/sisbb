@@ -24,7 +24,7 @@ import br.com.sisbib.api.modelo.repository.ReservaRepository;
 import br.com.sisbib.api.modelo.repository.UsuarioComumRepository;
 
 @RestController
-@RequestMapping("/reservas")
+@RequestMapping("/reserva")
 public class ReservaController {
 	
 	@Autowired
@@ -51,7 +51,7 @@ public class ReservaController {
 		Reserva reserva = form.converter(agendaRepository, usuarioComumRepository, livroRepository);
 		reservaRepository.save(reserva);
 		
-		URI uri = uriBuilder.path("/reservas/{id}").buildAndExpand(reserva.getCodigo()).toUri();
+		URI uri = uriBuilder.path("/reserva/{id}").buildAndExpand(reserva.getCodigo()).toUri();
 		return ResponseEntity.created(uri).body(new ReservaDto(reserva));
 	}
 	

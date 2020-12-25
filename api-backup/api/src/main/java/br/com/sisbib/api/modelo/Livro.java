@@ -20,7 +20,7 @@ public class Livro {
 	private String volume;
 	
 	@Enumerated(EnumType.STRING)
-	private SituacaoLivro situacao;
+	private SituacaoLivro situacao = SituacaoLivro.DISPONIVEL;
 	
 	private LocalDate dataQuarentena;
 	

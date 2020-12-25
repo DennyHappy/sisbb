@@ -89,9 +89,4 @@ public class LivroForm {
 	public Livro converter() {
 		return new Livro(codBarras, patrimonio, localizacao, titulo, autor, edicao, ano, volume, situacao, dataQuarentena);
 	}
-	
-//	public Topico converter(CursoRepository cursoRepository) {
-//		Curso curso = cursoRepository.findByNome(nomeCurso);
-//		return new Topico(titulo, mensagem, curso);
-//	}
 }

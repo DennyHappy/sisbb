@@ -15,37 +15,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.sisbib.api.modelo.Livro;
-import br.com.sisbib.api.modelo.controller.dto.LivroDto;
-import br.com.sisbib.api.modelo.controller.form.LivroForm;
-import br.com.sisbib.api.modelo.repository.LivroRepository;
+import br.com.sisbib.api.modelo.Agenda;
+import br.com.sisbib.api.modelo.controller.dto.AgendaDto;
+import br.com.sisbib.api.modelo.controller.form.AgendaForm;
+import br.com.sisbib.api.modelo.repository.AgendaRepository;
 
 @RestController
-@RequestMapping("/livro")
-public class LivrosController {
+@RequestMapping("/agenda")
+public class AgendaController {
 	
 	@Autowired
-	private LivroRepository livroRepository;
+	private AgendaRepository agendaRepository;
 	
 	@GetMapping
-	public List<LivroDto> lista(String titulo) {
-		if (titulo == null) {
-			List<Livro> livros = livroRepository.findAll();
-			return LivroDto.converter(livros);			
-		} else {
-			List<Livro> livros = livroRepository.findByTitulo(titulo);
-			return LivroDto.converter(livros);		
-		}
+	public List<AgendaDto> lista() {
+		List<Agenda> agendas = agendaRepository.findAll();
+		return AgendaDto.converter(agendas);			
 	}
 	
 	@PostMapping
 	@Transactional
-	public ResponseEntity<LivroDto> cadastrar(@RequestBody @Valid LivroForm form, UriComponentsBuilder uriBuilder) {
-		Livro livro = form.converter();
-		livroRepository.save(livro);
+	public ResponseEntity<AgendaDto> cadastrar(@RequestBody @Valid AgendaForm form, UriComponentsBuilder uriBuilder) {
+		Agenda agenda = form.converter();
+		agendaRepository.save(agenda);
 		
-		URI uri = uriBuilder.path("/livro/{id}").buildAndExpand(livro.getCodBarras()).toUri();
-		return ResponseEntity.created(uri).body(new LivroDto(livro));
+		URI uri = uriBuilder.path("/agenda/{id}").buildAndExpand(agenda.getCodigo()).toUri();
+		return ResponseEntity.created(uri).body(new AgendaDto(agenda));
 	}
 //	
 //	@PostMapping

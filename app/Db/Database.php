@@ -114,24 +114,18 @@ class Database{
      * @param string $fields
      * @return PDOStatement
      */
-    public function select($where = null, $join = null, $and = null, $like = null, $or = null, $order = null, $limit = null, $fields = '*'){
+    public function select($where = null, $join = null, $and = null, $like = null, $order = null, $limit = null, $fields = '*'){
         //DADOS DA QUERY
         $where = strlen($where) ? 'where '.$where : '';
         $order = strlen($order) ? 'order by '.$order : '';
         $limit = strlen($limit) ? 'limit '.$limit : '';
         $join = strlen($join) ? ','.$join : '';
         $and = strlen($and) ? 'and '.$and : '';
-        $or = strlen($or) ? 'or '.$or : '';
         $like = strlen($like) ? 'like '.$like : '';
 
         //MONTA A QUERY
-        if(isset($and,$join)){
-            $query = 'select '.$fields.' from '.$this->table.''.$join.' '.$where.' '.$and.' '.$order.' '.$limit;
-        }
-        if(isset($like)){
-            $query = 'select '.$fields.' from '.$this->table.''.$join.' '.$where.' '.$like.' '.$order.' '.$limit;
-        }
-
+        $query = 'select '.$fields.' from '.$this->table.''.$join.' '.$where.' '.$and.' '.$like.' '.$order.' '.$limit;
+        
         //echo "<pre>"; print_r($query); echo "</pre>"; exit;
         //EXECUTA A QUERY
         return $this->execute($query);

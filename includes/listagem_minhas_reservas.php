@@ -48,6 +48,13 @@
                                     </a>
                                     ';
                                 }
+                                if ($reserva->rsv_status_reserva == 'concluida') {
+                                    $resultados .= '
+                                    <a class="btn btn-info btn-sm" href="cadastra_devolucao.php?codRsv='.$reserva->rsv_codigo.'">
+                                        Reservar Devolução
+                                    </a>
+                                    ';
+                                }
                                 
         $resultados .= '
                             </td>

@@ -77,12 +77,6 @@ public class ReservaForm {
 	public void setCodBarras(List<Long> codBarras) {
 		this.codBarras = codBarras;
 	}
-
-	@Override
-		public String toString() {
-			// TODO Auto-generated method stub
-			return tipoReserva.toString() + " - " + matricula.toString() + " - " + codigoAgenda.toString();
-		}
 	
 	public Reserva converter(AgendaRepository agendaRepository, UsuarioComumRepository usuarioRepository, 
 			LivroRepository livroRepository) {

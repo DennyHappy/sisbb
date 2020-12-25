@@ -14,17 +14,17 @@ public class Agenda {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
 	private LocalDate data;
-	private LocalTime hora_ini;
-	private LocalTime hora_fin;
+	private LocalTime horaIni;
+	private LocalTime horaFin;
 	
 	public Agenda() {
 		
 	}
 	
-	public Agenda(LocalDate data, LocalTime hora_ini, LocalTime hora_fin) {
+	public Agenda(LocalDate data, LocalTime horaIni, LocalTime horaFin) {
 		this.data = data;
-		this.hora_ini = hora_ini;
-		this.hora_fin = hora_fin;
+		this.horaIni = horaIni;
+		this.horaFin = horaFin;
 	}
 
 	public Long getCodigo() {
@@ -35,11 +35,11 @@ public class Agenda {
 		return data;
 	}
 
-	public LocalTime getHora_ini() {
-		return hora_ini;
+	public LocalTime getHoraIni() {
+		return horaIni;
 	}
 
-	public LocalTime getHora_fin() {
-		return hora_fin;
+	public LocalTime getHoraFin() {
+		return horaFin;
 	}
 }

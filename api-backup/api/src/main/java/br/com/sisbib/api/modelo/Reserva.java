@@ -20,13 +20,13 @@ public class Reserva {
 	private Long codigo;
 	
 	@Enumerated(EnumType.STRING)
-	private TipoReserva tipo_reserva;
+	private TipoReserva tipoReserva;
 	
-	private LocalDate data_reserva;
-	private LocalTime hora_reserva;
+	private LocalDate dataReserva;
+	private LocalTime horaReserva;
 	
 	@Enumerated(EnumType.STRING)
-	private StatusReserva status_reserva = StatusReserva.ATIVA;
+	private StatusReserva statusReserva = StatusReserva.ATIVA;
 	
 	@ManyToOne
 	private UsuarioComum requisitante;
@@ -41,11 +41,11 @@ public class Reserva {
 		
 	}
 
-	public Reserva(TipoReserva tipo_reserva, LocalDate data_reserva, LocalTime hora_reserva, UsuarioComum requisitante,
+	public Reserva(TipoReserva tipoReserva, LocalDate dataReserva, LocalTime horaReserva, UsuarioComum requisitante,
 			Agenda agenda, List<Livro> livros) {
-		this.tipo_reserva = tipo_reserva;
-		this.data_reserva = data_reserva;
-		this.hora_reserva = hora_reserva;
+		this.tipoReserva = tipoReserva;
+		this.dataReserva = dataReserva;
+		this.horaReserva = horaReserva;
 		this.requisitante = requisitante;
 		this.agenda = agenda;
 		this.livros = livros;
@@ -55,20 +55,20 @@ public class Reserva {
 		return codigo;
 	}
 
-	public TipoReserva getTipo_reserva() {
-		return tipo_reserva;
+	public TipoReserva getTipoReserva() {
+		return tipoReserva;
 	}
 
-	public LocalDate getData_reserva() {
-		return data_reserva;
+	public LocalDate getDataReserva() {
+		return dataReserva;
 	}
 
-	public LocalTime getHora_reserva() {
-		return hora_reserva;
+	public LocalTime getHoraReserva() {
+		return horaReserva;
 	}
 
-	public StatusReserva getStatus_reserva() {
-		return status_reserva;
+	public StatusReserva getStatusReserva() {
+		return statusReserva;
 	}
 
 	public UsuarioComum getRequisitante() {

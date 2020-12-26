@@ -1,7 +1,6 @@
 package br.com.sisbib.api.modelo.controller.dto;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import org.springframework.data.domain.Page;
 
 import br.com.sisbib.api.modelo.Livro;
 import br.com.sisbib.api.modelo.SituacaoLivro;
@@ -65,7 +64,7 @@ public class LivroDto {
 		return patrimonio;
 	}
 	
-	public static List<LivroDto> converter(List<Livro> livros) {
-		return livros.stream().map(LivroDto::new).collect(Collectors.toList());
+	public static Page<LivroDto> converter(Page<Livro> livros) {
+		return livros.map(LivroDto::new);
 	}
 }

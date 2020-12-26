@@ -2,8 +2,8 @@ package br.com.sisbib.api.modelo.controller.dto;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
-import java.util.stream.Collectors;
+
+import org.springframework.data.domain.Page;
 
 import br.com.sisbib.api.modelo.Agenda;
 
@@ -20,8 +20,8 @@ public class AgendaDto {
 		this.horaFin = agenda.getHoraFin();
 	}
 	
-	public static List<AgendaDto> converter(List<Agenda> agenda) {
-		return agenda.stream().map(AgendaDto::new).collect(Collectors.toList());
+	public static Page<AgendaDto> converter(Page<Agenda> agenda) {
+		return agenda.map(AgendaDto::new);
 	}
 
 	public Long getCodigo() {

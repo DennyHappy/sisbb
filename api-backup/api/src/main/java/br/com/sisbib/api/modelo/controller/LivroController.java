@@ -1,21 +1,25 @@
 package br.com.sisbib.api.modelo.controller;
 
 import java.net.URI;
-import java.util.List;
-
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.sisbib.api.modelo.Livro;
+import br.com.sisbib.api.modelo.SituacaoLivro;
 import br.com.sisbib.api.modelo.controller.dto.LivroDto;
 import br.com.sisbib.api.modelo.controller.form.LivroForm;
 import br.com.sisbib.api.modelo.repository.LivroRepository;
@@ -28,13 +32,28 @@ public class LivroController {
 	private LivroRepository livroRepository;
 	
 	@GetMapping
-	public List<LivroDto> lista(String titulo) {
-		if (titulo == null) {
-			List<Livro> livros = livroRepository.findAll();
+	public Page<LivroDto> lista(@RequestParam(required = false) String titulo, 
+			@RequestParam(required = false) String autor, @RequestParam(required = false) SituacaoLivro situacao, 
+			@RequestParam(required = false) @PageableDefault(sort = "codBarras", direction = Direction.DESC, page = 0, size = 10)Pageable paginacao) {
+
+		if (titulo == null && autor == null && situacao == null) {
+			Page<Livro> livros = livroRepository.findAll(paginacao);
 			return LivroDto.converter(livros);			
-		} else {
-			List<Livro> livros = livroRepository.findByTitulo(titulo);
+		} else if(autor == null && situacao == null){
+			Page<Livro> livros = livroRepository.findByTituloIgnoreCaseContaining(titulo, paginacao);
 			return LivroDto.converter(livros);		
+		} else if(titulo == null && situacao == null){
+			Page<Livro> livros = livroRepository.findByAutorIgnoreCaseContaining(autor, paginacao);
+			return LivroDto.converter(livros);		
+		} else if(autor == null && titulo == null) {
+			Page<Livro> livros = livroRepository.findBySituacao(situacao, paginacao);
+			return LivroDto.converter(livros);
+		} else if(autor == null) {
+			Page<Livro> livros = livroRepository.findByTituloIgnoreCaseContainingAndSituacao(titulo, situacao, paginacao);
+			return LivroDto.converter(livros);
+		} else {
+			Page<Livro> livros = livroRepository.findByAutorIgnoreCaseContainingAndSituacao(autor, situacao, paginacao);
+			return LivroDto.converter(livros);			
 		}
 	}
 	

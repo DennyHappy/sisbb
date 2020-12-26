@@ -3,6 +3,8 @@ package br.com.sisbib.api.modelo.controller.dto;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Page;
+
 import br.com.sisbib.api.modelo.UsuarioBibliotecario;
 
 public class UsuarioBibliotecarioDto {
@@ -18,8 +20,8 @@ public class UsuarioBibliotecarioDto {
 		this.senha = usuario.getIdUser();
 	}
 
-	public static List<UsuarioBibliotecarioDto> converter(List<UsuarioBibliotecario> usuarios) {
-		return usuarios.stream().map(UsuarioBibliotecarioDto::new).collect(Collectors.toList());
+	public static Page<UsuarioBibliotecarioDto> converter(Page<UsuarioBibliotecario> usuarios) {
+		return usuarios.map(UsuarioBibliotecarioDto::new);
 	}
 
 	public Long getMatricula() {

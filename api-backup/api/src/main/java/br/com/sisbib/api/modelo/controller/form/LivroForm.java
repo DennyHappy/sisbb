@@ -22,7 +22,7 @@ public class LivroForm {
 	private String edicao;
 	private String ano;
 	private String volume;
-	private SituacaoLivro situacao;
+	private SituacaoLivro situacao = SituacaoLivro.DISPONIVEL;
 	private LocalDate dataQuarentena;
 	
 	public Long getCodBarras() {

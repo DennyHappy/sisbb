@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import org.springframework.data.domain.Page;
 
 import br.com.sisbib.api.modelo.Livro;
 import br.com.sisbib.api.modelo.Reserva;
@@ -71,7 +71,7 @@ public class ReservaDto {
 		return titulos;
 	}
 	
-	public static List<ReservaDto> converter(List<Reserva> reservas) {
-		return reservas.stream().map(ReservaDto::new).collect(Collectors.toList());
+	public static Page<ReservaDto> converter(Page<Reserva> reservas) {
+		return reservas.map(ReservaDto::new);
 	}
 }

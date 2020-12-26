@@ -1,12 +1,14 @@
 package br.com.sisbib.api.modelo.controller;
 
 import java.net.URI;
-import java.util.List;
-
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,8 +42,9 @@ public class ReservaController {
 	private LivroRepository livroRepository;
 	
 	@GetMapping
-	public List<ReservaDto> lista() {
-		List<Reserva> reservas = reservaRepository.findAll();
+	public Page<ReservaDto> lista(@PageableDefault(sort = "codigo",
+			direction = Direction.DESC, page = 0, size = 10)Pageable paginacao) {
+		Page<Reserva> reservas = reservaRepository.findAll(paginacao);
 		return ReservaDto.converter(reservas);
 	}
 	

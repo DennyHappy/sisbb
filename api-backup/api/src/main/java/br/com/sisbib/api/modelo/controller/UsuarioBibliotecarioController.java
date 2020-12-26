@@ -1,12 +1,14 @@
 package br.com.sisbib.api.modelo.controller;
 
 import java.net.URI;
-import java.util.List;
-
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,8 +30,9 @@ public class UsuarioBibliotecarioController {
 	private UsuarioBibliotecarioRepository usuarioBibliotecarioRepository;
 	
 	@GetMapping
-	public List<UsuarioBibliotecarioDto> lista() {
-		List<UsuarioBibliotecario> usuarios = usuarioBibliotecarioRepository.findAll();
+	public Page<UsuarioBibliotecarioDto> lista(@PageableDefault(sort = "matricula",
+			direction = Direction.DESC, page = 0, size = 10)Pageable paginacao) {
+		Page<UsuarioBibliotecario> usuarios = usuarioBibliotecarioRepository.findAll(paginacao);
 		return UsuarioBibliotecarioDto.converter(usuarios);
 	}
 	

@@ -1,7 +1,6 @@
 package br.com.sisbib.api.modelo.controller.dto;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import org.springframework.data.domain.Page;
 
 import br.com.sisbib.api.modelo.UsuarioComum;
 
@@ -18,8 +17,8 @@ public class UsuarioComumDto {
 		this.idUser = usuario.getIdUser();
 	}
 
-	public static List<UsuarioComumDto> converter(List<UsuarioComum> usuarios) {
-		return usuarios.stream().map(UsuarioComumDto::new).collect(Collectors.toList());
+	public static Page<UsuarioComumDto> converter(Page<UsuarioComum> usuarios) {
+		return usuarios.map(UsuarioComumDto::new);
 	}
 
 	public Long getMatricula() {

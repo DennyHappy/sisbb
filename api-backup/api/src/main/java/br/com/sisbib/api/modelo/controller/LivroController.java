@@ -34,8 +34,7 @@ public class LivroController {
 	@GetMapping
 	public Page<LivroDto> lista(@RequestParam(required = false) String titulo, 
 			@RequestParam(required = false) String autor, @RequestParam(required = false) SituacaoLivro situacao, 
-			@RequestParam(required = false) @PageableDefault(sort = "codBarras", direction = Direction.DESC, page = 0, size = 10)Pageable paginacao) {
-
+			@PageableDefault(sort = "codBarras", direction = Direction.DESC, page = 0, size = 10)Pageable paginacao) {
 		if (titulo == null && autor == null && situacao == null) {
 			Page<Livro> livros = livroRepository.findAll(paginacao);
 			return LivroDto.converter(livros);			

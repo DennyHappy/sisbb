@@ -1,8 +1,5 @@
 package br.com.sisbib.api.modelo.controller.dto;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.data.domain.Page;
 
 import br.com.sisbib.api.modelo.UsuarioBibliotecario;

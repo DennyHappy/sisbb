@@ -1,6 +1,8 @@
 package br.com.sisbib.api.modelo.controller;
 
 import java.net.URI;
+import java.util.Optional;
+
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
@@ -11,6 +13,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,8 +45,18 @@ public class AgendaController {
 		Agenda agenda = form.converter();
 		agendaRepository.save(agenda);
 		
-		URI uri = uriBuilder.path("/agenda/{id}").buildAndExpand(agenda.getCodigo()).toUri();
+		URI uri = uriBuilder.path("/agenda/{codigo}").buildAndExpand(agenda.getCodigo()).toUri();
 		return ResponseEntity.created(uri).body(new AgendaDto(agenda));
+	}
+	
+	@GetMapping("/{codigo}")
+	public ResponseEntity<AgendaDto> detalhar(@PathVariable Long codigo) {
+		Optional<Agenda> agenda = agendaRepository.findById(codigo);
+		if (agenda.isPresent()) {
+			return ResponseEntity.ok(new AgendaDto(agenda.get()));	
+		} else {
+			return ResponseEntity.notFound().build();
+		}
 	}
 //	
 //	@PostMapping

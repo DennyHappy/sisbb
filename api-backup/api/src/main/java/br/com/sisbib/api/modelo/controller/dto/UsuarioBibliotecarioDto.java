@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import br.com.sisbib.api.modelo.UsuarioBibliotecario;
-import br.com.sisbib.api.modelo.UsuarioComum;
 
 public class UsuarioBibliotecarioDto {
 	private Long matricula;

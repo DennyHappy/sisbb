@@ -13,6 +13,9 @@ public class LivroDto {
 	private String ano;
 	private String volume;
 	private SituacaoLivro situacao;
+	private Long codBarra;
+	private Long patrimonio;
+	private String localizacao;
 	
 	public LivroDto(Livro livro) {
 		this.titulo = livro.getTitulo();
@@ -21,6 +24,9 @@ public class LivroDto {
 		this.ano = livro.getAno();
 		this.volume = livro.getVolume();
 		this.situacao = livro.getSituacao();
+		this.codBarra = livro.getCodBarras();
+		this.patrimonio = livro.getPatrimonio();
+		this.localizacao = livro.getLocalizacao();
 	}
 
 	public String getTitulo() {
@@ -45,6 +51,18 @@ public class LivroDto {
 
 	public SituacaoLivro getSituacao() {
 		return situacao;
+	}
+	
+	public Long getCodBarra() {
+		return codBarra;
+	}
+	
+	public String getLocalizacao() {
+		return localizacao;
+	}
+	
+	public Long getPatrimonio() {
+		return patrimonio;
 	}
 	
 	public static List<LivroDto> converter(List<Livro> livros) {

@@ -64,6 +64,17 @@ public class UsuarioComumController {
 			return ResponseEntity.notFound().build();
 		}
 	}
+	
+	@GetMapping("/{email}")
+	public ResponseEntity<UsuarioComumDto> detalharEmail(@PathVariable String email) {
+		Optional<UsuarioComum> userC = usuarioComumRepository.findByEmail(email);
+		if (userC.isPresent()) {
+			return ResponseEntity.ok(new UsuarioComumDto(userC.get()));	
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+	}
+
 
 //	@PutMapping("/{id}")
 //	@Transactional

@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Agenda {
@@ -41,5 +42,17 @@ public class Agenda {
 
 	public LocalTime getHoraFin() {
 		return horaFin;
+	}
+	
+	public void setData(LocalDate data) {
+		this.data = data;
+	}
+	
+	public void setHoraIni(LocalTime horaIni) {
+		this.horaIni = horaIni;
+	}
+	
+	public void setHoraFin(LocalTime horaFin) {
+		this.horaFin = horaFin;
 	}
 }

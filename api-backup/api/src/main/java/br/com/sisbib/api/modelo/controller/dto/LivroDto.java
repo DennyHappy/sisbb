@@ -1,5 +1,7 @@
 package br.com.sisbib.api.modelo.controller.dto;
 
+import java.time.LocalDate;
+
 import org.springframework.data.domain.Page;
 
 import br.com.sisbib.api.modelo.Livro;
@@ -15,6 +17,7 @@ public class LivroDto {
 	private Long codBarras;
 	private Long patrimonio;
 	private String localizacao;
+	private LocalDate dataQuarentena;
 	
 	public LivroDto(Livro livro) {
 		this.titulo = livro.getTitulo();
@@ -62,6 +65,10 @@ public class LivroDto {
 	
 	public Long getPatrimonio() {
 		return patrimonio;
+	}
+	
+	public LocalDate getDataQuarentena() {
+		return dataQuarentena;
 	}
 	
 	public static Page<LivroDto> converter(Page<Livro> livros) {

@@ -11,7 +11,6 @@ import br.com.sisbib.api.modelo.repository.LivroRepository;
 public class AtualizaLivroForm {
 	@NotNull
 	private SituacaoLivro situacao = SituacaoLivro.DISPONIVEL;
-	@NotNull
 	private LocalDate dataQuarentena;
 	
 	public SituacaoLivro getSituacao() {

@@ -18,11 +18,10 @@ public class Livro {
 	private String edicao;
 	private String ano;
 	private String volume;
+	private LocalDate dataQuarentena;
 	
 	@Enumerated(EnumType.STRING)
 	private SituacaoLivro situacao = SituacaoLivro.DISPONIVEL;
-	
-	private LocalDate dataQuarentena;
 	
 	public Livro() {
 		

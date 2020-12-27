@@ -29,6 +29,7 @@ public class LivroDto {
 		this.codBarras = livro.getCodBarras();
 		this.patrimonio = livro.getPatrimonio();
 		this.localizacao = livro.getLocalizacao();
+		this.dataQuarentena = livro.getDataQuarentena();
 	}
 
 	public String getTitulo() {

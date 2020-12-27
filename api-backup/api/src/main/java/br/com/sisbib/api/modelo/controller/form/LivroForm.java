@@ -9,6 +9,7 @@ import org.hibernate.validator.constraints.Length;
 
 import br.com.sisbib.api.modelo.Livro;
 import br.com.sisbib.api.modelo.SituacaoLivro;
+import br.com.sisbib.api.modelo.repository.LivroRepository;
 
 public class LivroForm {
 	@NotNull
@@ -88,5 +89,21 @@ public class LivroForm {
 	
 	public Livro converter() {
 		return new Livro(codBarras, patrimonio, localizacao, titulo, autor, edicao, ano, volume, situacao, dataQuarentena);
+	}
+	public Livro atualizar(Long codBarras2, LivroRepository livroRepository) {
+		Livro livro = livroRepository.getOne(codBarras2);
+		
+		livro.setAno(this.ano);
+		livro.setAutor(this.autor);
+		livro.setCodBarras(this.codBarras);
+		livro.setDataQuarentena(this.dataQuarentena);
+		livro.setEdicao(this.edicao);
+		livro.setLocalizacao(this.localizacao);
+		livro.setPatrimonio(this.patrimonio);
+		livro.setSituacao(this.situacao);
+		livro.setTitulo(this.titulo);
+		livro.setVolume(this.volume);
+		
+		return livro;
 	}
 }

@@ -12,7 +12,7 @@ public class LivroDto {
 	private String ano;
 	private String volume;
 	private SituacaoLivro situacao;
-	private Long codBarra;
+	private Long codBarras;
 	private Long patrimonio;
 	private String localizacao;
 	
@@ -23,7 +23,7 @@ public class LivroDto {
 		this.ano = livro.getAno();
 		this.volume = livro.getVolume();
 		this.situacao = livro.getSituacao();
-		this.codBarra = livro.getCodBarras();
+		this.codBarras = livro.getCodBarras();
 		this.patrimonio = livro.getPatrimonio();
 		this.localizacao = livro.getLocalizacao();
 	}
@@ -52,8 +52,8 @@ public class LivroDto {
 		return situacao;
 	}
 	
-	public Long getCodBarra() {
-		return codBarra;
+	public Long getCodBarras() {
+		return codBarras;
 	}
 	
 	public String getLocalizacao() {

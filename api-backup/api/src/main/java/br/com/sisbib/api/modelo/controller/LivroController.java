@@ -1,6 +1,8 @@
 package br.com.sisbib.api.modelo.controller;
 
 import java.net.URI;
+import java.util.Optional;
+
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
@@ -11,7 +13,9 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,6 +26,7 @@ import br.com.sisbib.api.modelo.Livro;
 import br.com.sisbib.api.modelo.SituacaoLivro;
 import br.com.sisbib.api.modelo.controller.dto.LivroDto;
 import br.com.sisbib.api.modelo.controller.form.LivroForm;
+import br.com.sisbib.api.modelo.controller.form.SituacaoLivroForm;
 import br.com.sisbib.api.modelo.repository.LivroRepository;
 
 @RestController
@@ -62,8 +67,30 @@ public class LivroController {
 		Livro livro = form.converter();
 		livroRepository.save(livro);
 		
-		URI uri = uriBuilder.path("/livro/{id}").buildAndExpand(livro.getCodBarras()).toUri();
+		URI uri = uriBuilder.path("/livro/{codBarras}").buildAndExpand(livro.getCodBarras()).toUri();
 		return ResponseEntity.created(uri).body(new LivroDto(livro));
+	}
+	
+	@GetMapping("/{codBarras}")
+	public ResponseEntity<LivroDto> detalhar(@PathVariable Long codBarras) {
+		Optional<Livro> livro = livroRepository.findById(codBarras);
+		if (livro.isPresent()) {
+			return ResponseEntity.ok(new LivroDto(livro.get()));	
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+	}
+	
+	@PutMapping("/{codBarras}")
+	@Transactional
+	public ResponseEntity<LivroDto> atualizar(@PathVariable Long codBarras, @RequestBody @Valid SituacaoLivroForm form) {
+		Optional<Livro> optional = livroRepository.findById(codBarras);
+		if (optional.isPresent()) {
+			Livro livro = form.atualizar(codBarras, livroRepository);
+			return ResponseEntity.ok(new LivroDto(livro));	
+		} else {
+			return ResponseEntity.notFound().build();
+		}
 	}
 //	
 //	@PostMapping
@@ -86,17 +113,7 @@ public class LivroController {
 //		}
 //	}
 //
-//	@PutMapping("/{id}")
-//	@Transactional
-//	public ResponseEntity<TopicoDto> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizacaoTopicoForm form) {
-//		Optional<Topico> optional = topicoRepository.findById(id);
-//		if (optional.isPresent()) {
-//			Topico topico = form.atualizar(id, topicoRepository);
-//			return ResponseEntity.ok(new TopicoDto(topico));	
-//		} else {
-//			return ResponseEntity.notFound().build();
-//		}
-//	}
+//	
 //	
 //	@DeleteMapping("/{id}")
 //	@Transactional

@@ -81,4 +81,44 @@ public class Livro {
 	public LocalDate getDataQuarentena() {
 		return dataQuarentena;
 	}
+
+	public void setCodBarras(Long codBarras) {
+		this.codBarras = codBarras;
+	}
+
+	public void setPatrimonio(Long patrimonio) {
+		this.patrimonio = patrimonio;
+	}
+
+	public void setLocalizacao(String localizacao) {
+		this.localizacao = localizacao;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+	public void setAutor(String autor) {
+		this.autor = autor;
+	}
+
+	public void setEdicao(String edicao) {
+		this.edicao = edicao;
+	}
+
+	public void setAno(String ano) {
+		this.ano = ano;
+	}
+
+	public void setVolume(String volume) {
+		this.volume = volume;
+	}
+
+	public void setSituacao(SituacaoLivro situacao) {
+		this.situacao = situacao;
+	}
+
+	public void setDataQuarentena(LocalDate dataQuarentena) {
+		this.dataQuarentena = dataQuarentena;
+	}	
 }

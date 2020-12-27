@@ -1,6 +1,7 @@
 package br.com.sisbib.api.modelo.controller;
 
 import java.net.URI;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -40,11 +41,17 @@ public class UsuarioComumController {
 	@PostMapping
 	@Transactional
 	public ResponseEntity<UsuarioComumDto> cadastrar(@RequestBody @Valid UsuarioComumForm form, UriComponentsBuilder uriBuilder){
-		UsuarioComum usuario = form.converter();
-		usuarioComumRepository.save(usuario);
+		Optional<UsuarioComum> userC = usuarioComumRepository.findByEmail(form.getEmail());
 		
-		URI uri = uriBuilder.path("usuariocm/{id}").buildAndExpand(usuario.getMatricula()).toUri();
-		return ResponseEntity.created(uri).body(new UsuarioComumDto(usuario));
+		if(!userC.isPresent()) {
+			UsuarioComum usuario = form.converter();
+			usuarioComumRepository.save(usuario);
+			
+			URI uri = uriBuilder.path("usuariocm/{id}").buildAndExpand(usuario.getMatricula()).toUri();
+			return ResponseEntity.created(uri).body(new UsuarioComumDto(usuario));
+		} else {
+			return ResponseEntity.badRequest().build();
+		}
 	}
 	
 //	@PostMapping

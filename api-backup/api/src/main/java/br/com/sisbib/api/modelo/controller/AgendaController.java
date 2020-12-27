@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -72,17 +73,17 @@ public class AgendaController {
 		}
 	}
 	
-//	
-//	@DeleteMapping("/{id}")
-//	@Transactional
-//	public ResponseEntity<?> deletar(@PathVariable Long id) {
-//		Optional<Topico> optional = topicoRepository.findById(id);
-//		if (optional.isPresent()) {
-//			topicoRepository.deleteById(id);
-//			return ResponseEntity.ok().build();
-//		} else {
-//			return ResponseEntity.notFound().build();
-//		}
-//	}
+	
+	@DeleteMapping("/{codigo}")
+	@Transactional
+	public ResponseEntity<?> deletar(@PathVariable Long codigo) {
+		Optional<Agenda> optional = agendaRepository.findById(codigo);
+		if (optional.isPresent()) {
+			agendaRepository.deleteById(codigo);
+			return ResponseEntity.ok().build();
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+	}
 	
 }

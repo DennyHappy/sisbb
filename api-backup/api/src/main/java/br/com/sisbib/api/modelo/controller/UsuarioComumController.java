@@ -13,6 +13,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,33 +48,23 @@ public class UsuarioComumController {
 			UsuarioComum usuario = form.converter();
 			usuarioComumRepository.save(usuario);
 			
-			URI uri = uriBuilder.path("usuariocm/{id}").buildAndExpand(usuario.getMatricula()).toUri();
+			URI uri = uriBuilder.path("usuariocm/{matricula}").buildAndExpand(usuario.getMatricula()).toUri();
 			return ResponseEntity.created(uri).body(new UsuarioComumDto(usuario));
 		} else {
 			return ResponseEntity.badRequest().build();
 		}
 	}
 	
-//	@PostMapping
-//	@Transactional
-//	public ResponseEntity<TopicoDto> cadastrar(@RequestBody @Valid TopicoForm form, UriComponentsBuilder uriBuilder) {
-//		Topico topico = form.converter(cursoRepository);
-//		topicoRepository.save(topico);
-//		
-//		URI uri = uriBuilder.path("/topicos/{id}").buildAndExpand(topico.getId()).toUri();
-//		return ResponseEntity.created(uri).body(new TopicoDto(topico));
-//	}
-//	
-//	@GetMapping("/{id}")
-//	public ResponseEntity<DetalhesTopicoDto> detalhar(@PathVariable Long id) {
-//		Optional<Topico> topico = topicoRepository.findById(id);
-//		if (topico.isPresent()) {
-//			return ResponseEntity.ok(new DetalhesTopicoDto(topico.get()));	
-//		} else {
-//			return ResponseEntity.notFound().build();
-//		}
-//	}
-//
+	@GetMapping("/{matricula}")
+	public ResponseEntity<UsuarioComumDto> detalhar(@PathVariable Long matricula) {
+		Optional<UsuarioComum> userC = usuarioComumRepository.findById(matricula);
+		if (userC.isPresent()) {
+			return ResponseEntity.ok(new UsuarioComumDto(userC.get()));	
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+	}
+
 //	@PutMapping("/{id}")
 //	@Transactional
 //	public ResponseEntity<TopicoDto> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizacaoTopicoForm form) {

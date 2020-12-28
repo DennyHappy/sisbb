@@ -2,13 +2,15 @@
 require_once '../config.php';
 
 try {
-    //DEFINIÇÃOES DA API DE AUTENTICAÇÃO DO GOOGLE
-    $adapter->authenticate();
-    $userProfile = $adapter->getUserProfile();
+  //DEFINIÇÃOES DA API DE AUTENTICAÇÃO DO GOOGLE
+  $adapter->authenticate();
+  $userProfile = $adapter->getUserProfile();
 
-    $_SESSION['nome'] = $userProfile->displayName;
-    $_SESSION['email'] = $userProfile->email;
-    $_SESSION['identifier'] = $userProfile->identifier;
+  $_SESSION['nome'] = $userProfile->displayName;
+  $_SESSION['email'] = $userProfile->email;
+  $_SESSION['identifier'] = $userProfile->identifier;
+
+  if (isset($_POST['matricula'],$_POST['nome'],$_POST['email'],$_POST['identifier'])) {
 
     $curl = curl_init();
 
@@ -23,9 +25,9 @@ try {
       CURLOPT_CUSTOMREQUEST => 'POST',
       CURLOPT_POSTFIELDS =>'{
         "matricula": '.$_POST['matricula'].',
-        "nome": "'.$_SESSION['nome'].'",
-        "email": "'.$_SESSION['email'].'",
-        "idUser": '.$_SESSION['identifier'].'
+        "nome": "'.$_POST['nome'].'",
+        "email": "'.$_POST['email'].'",
+        "idUser": '.$_POST['identifier'].'
     }',
       CURLOPT_HTTPHEADER => array(
         'Content-Type: application/json'
@@ -36,20 +38,25 @@ try {
 
     curl_close($curl);
 
-    $_SESSION['matricula'] = $_POST['matricula']
     //echo $response;
-}
-catch( Exception $e ){
+
+    header('location: index.php?status=successCadastro');
+    exit;
+    
+  }else{
+    echo 'Preencha os campos!';
+  }
+  
+}catch( Exception $e ){
     echo $e->getMessage() ;
 }
 
 
-//if (isset($_SESSION['email'])) {
+if (isset($_SESSION['email'])) {
     include __DIR__.'/../includes/header2.php';
-//    include __DIR__.'/../includes/info_user.php';
     include __DIR__.'/../includes/formulario_cadastro.php';
     include __DIR__.'/../includes/footer.php';
-//}else{
-//    header('location: ../index.php?status=errorAcesso');
-//    exit;
-//}
+}else{
+    header('location: ../index.php?status=errorAcesso');
+    exit;
+}

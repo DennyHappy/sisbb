@@ -1,9 +1,9 @@
 <?php
 
-include __DIR__.'/../vendor/autoload.php';
+include __DIR__.'/vendor/autoload.php';
 
 $config = [
-    'callback' => 'http://localhost/sisbb/inicio.php',
+    'callback' => 'http://localhost/sisbb/sisbbAluno/cadastrarUser.php',
     'keys'     => [
                     'id' => '895552023784-c5c521bf7ufl5i5cqg21cplgu2jcapmh.apps.googleusercontent.com',
                     'secret' => 'jV1dipSvocMKvOXbPCTDkFAz'

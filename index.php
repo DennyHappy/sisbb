@@ -75,13 +75,13 @@
                   <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                     <div class="row mt-3">
                         <div class="col-6">
-                            <a href="inicio.php" class="btn btn-success btn-lg col-12">
+                            <a href="fazerLogin.php" class="btn btn-success btn-lg col-12">
                                 Fazer Login
                                 
                             </a>
                         </div>
                         <div class="col-6">
-                            <a href="inicio.php" class="btn btn-success btn-lg col-12">
+                            <a href="sisbbAluno/cadastrarUser.php" class="btn btn-success btn-lg col-12">
                                 Cadastrar-se
                             </a>
                         </div>

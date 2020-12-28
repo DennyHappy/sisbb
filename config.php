@@ -1,6 +1,6 @@
 <?php
 
-include __DIR__.'/vendor/autoload.php';
+include __DIR__.'/../vendor/autoload.php';
 
 $config = [
     'callback' => 'http://localhost/sisbb/inicio.php',

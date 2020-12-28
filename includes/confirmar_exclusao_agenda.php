@@ -10,7 +10,7 @@
 
     <form method="post">
         <div class="form-group">
-            <p>Você deseja realmente excluir a agenda de código <strong><?=$obAgenda->agd_codigo?></strong>?</p>
+            <p>Você deseja realmente excluir a agenda de código <strong><?=$obAgenda->codigo?></strong>?</p>
         </div>
 
         <div class="form-group">

@@ -1,8 +1,8 @@
 <?php
 
-require __DIR__.'/../vendor/autoload.php';
+require __DIR__.'/../../vendor/autoload.php';
 
-use \App\Entity\Livro;
+//use \App\Entity\Livro;
 
 session_start();
 
@@ -54,28 +54,46 @@ if (count($_SESSION['carrinho']) == 0) {
 
     $resultados = '';
     foreach ($_SESSION['carrinho'] as $id => $qtd) {
-        $obLivro = Livro::getLivro($id);
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+          CURLOPT_URL => 'http://localhost:8080/livro/'.$id,
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => '',
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 0,
+          CURLOPT_FOLLOWLOCATION => true,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => 'GET',
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+        //echo $response;
+
+        $obLivro = json_decode($response);
     
         $resultados .= '
                         <tr>
-                            <td>'.$obLivro->lv_cod_barras.'</td>
-                            <td>'.$obLivro->lv_titulo.'</td>
+                            <td>'.$obLivro->codBarras.'</td>
+                            <td>'.$obLivro->titulo.'</td>
                             <td><a href="?acao=del&id='.$id.'" class="btn btn-primary btn-sm">Remover</a></td>
                         </tr>
         ';
 
         array_push($_SESSION['dados'],[
-            'lv_cod_barras' => $obLivro->lv_cod_barras
+            'codBarras' => $obLivro->codBarras
         ]);
     }
 }
 
-if (isset($_SESSION['email'])) {
+//if (isset($_SESSION['email'])) {
     include __DIR__.'/../includes/header1.php';
-    include __DIR__.'/../includes/info_user.php';
+//    include __DIR__.'/../includes/info_user.php';
     include __DIR__.'/../includes/carrinho.php';
     include __DIR__.'/../includes/footer.php';
-}else{
-    header('location: ../index.php?status=errorAcesso');
-    exit;
-}
+//}else{
+//    header('location: ../index.php?status=errorAcesso');
+//    exit;
+//}

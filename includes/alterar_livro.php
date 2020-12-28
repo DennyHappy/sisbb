@@ -10,30 +10,30 @@
 
     <form method="post">
         <div class="form-group">
-            <?=($obLivro->lv_situacao == 'emprestado' ? '
+            <?=($obLivro->situacao == 'EMPRESTADO' ? '
                 <p>Você deseja realmente alterar a situação do livro para 
-                    <strong>'.($obLivro->lv_situacao == 'emprestado' ? '<span class="btn btn-danger btn-sm">Quarentena</span>' : '').'</strong> ?
+                    <strong>'.($obLivro->situacao == 'EMPRESTADO' ? '<span class="btn btn-danger btn-sm">Quarentena</span>' : '').'</strong> ?
                 </p>
             ' : '
                 <p>Você deseja realmente alterar a situação do livro para 
-                    <strong>'.($obLivro->lv_situacao == 'quarentena' ? '<span class="btn btn-success btn-sm">Disponivel</span>' : '').'</strong> ?
+                    <strong>'.($obLivro->situacao == 'QUARENTENA' ? '<span class="btn btn-success btn-sm">Disponivel</span>' : '').'</strong> ?
                 </p>
             
             ')?> 
         </div>
 
         <div class="form-group">
-            <input type="hidden" name="lv_situacao_atual" value="<?=$obLivro->lv_situacao?>">
+            <input type="hidden" name="situacao_atual" value="<?=$obLivro->situacao?>">
 
             
 
-            <?=($obLivro->lv_situacao == 'emprestado' ? '
-                <input type="hidden" name="lv_situacao" value="'.($obLivro->lv_situacao == 'emprestado' ? 'quarentena' : '').'">
+            <?=($obLivro->situacao == 'EMPRESTADO' ? '
+                <input type="hidden" name="situacao" value="'.($obLivro->situacao == 'EMPRESTADO' ? 'QUARENTENA' : '').'">
             ' : '
-                <input type="hidden" name="lv_situacao" value="'.($obLivro->lv_situacao == 'quarentena' ? 'disponivel' : '').'">
+                <input type="hidden" name="situacao" value="'.($obLivro->situacao == 'QUARENTENA' ? 'DISPONIVEL' : '').'">
             ')?>
 
-            <input type="hidden" name="lv_cod_barras" value="<?=$obLivro->lv_cod_barras?>">
+            <input type="hidden" name="codBarras" value="<?=$obLivro->codBarras?>">
 
             <a href="<?=$_SERVER['HTTP_REFERER']?>" class="btn btn-success">
                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-return-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

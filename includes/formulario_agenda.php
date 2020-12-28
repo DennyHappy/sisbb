@@ -14,15 +14,15 @@
     <form method="post" class="form-inline">
         <div class="form-group col-4">
             <label>Data: </label>
-            <input type="date" class="form-control col-12" name="agd_data" value="<?=$obAgenda->agd_data?>">
+            <input type="date" class="form-control col-12" name="data" value="<?=$obAgenda->data?>">
         </div>
         <div class="form-group col-4">
             <label>Hora Inicial: </label>
-            <input type="time" class="form-control col-12" name="agd_hora_ini" value="<?=$obAgenda->agd_hora_ini?>">
+            <input type="time" class="form-control col-12" name="horaIni" value="<?=$obAgenda->horaIni?>">
         </div>
         <div class="form-group col-4">
             <label>Hora Final: </label>
-            <input type="time" class="form-control col-12" name="agd_hora_fin" value="<?=$obAgenda->agd_hora_fin?>">
+            <input type="time" class="form-control col-12" name="horaFin" value="<?=$obAgenda->horaFin?>">
         </div>
         <div class="form-group col-4">
             <button type="submit" class="btn btn-success col-12 mt-4">Cadastrar</button>

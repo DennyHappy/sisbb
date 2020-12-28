@@ -25,23 +25,23 @@
     }
 
     $resultados = '';
-    foreach ($agendas as $agenda) {
+    foreach ($agendas->content as $agenda) {
         $resultados .= '<div class="card">';
                         if (isset($_GET['codRsv'])) {
-                            $resultados .= '<form action="reagendar.php?hora=ativo'.$agenda->agd_codigo.'" method="post">
+                            $resultados .= '<form action="reagendar.php?hora=ativo'.$agenda->codigo.'" method="post">
                                                 <input type="hidden" name="rsv_codigo" value="'.$_GET['codRsv'].'">
                                             ';
                         }else{
-                            $resultados .= '<form action="finaliza_reserva.php?hora=ativo'.$agenda->agd_codigo.'" method="post">';
+                            $resultados .= '<form action="finaliza_reserva.php?hora=ativo'.$agenda->codigo.'" method="post">';
                         }
 
         $resultados .= '
-                            <div class="card-header" id="heading'.$agenda->agd_codigo.'">
+                            <div class="card-header" id="heading'.$agenda->codigo.'">
                                 <div class="row">
                                     <div class="col-9">
                                         <h5 class="mb-0">
-                                            <a href="#" class="btn btn-info btn-sm" data-toggle="collapse" data-target="#collapse'.$agenda->agd_codigo.'" aria-expanded="true" aria-controls="collapseOne">
-                                                Horários disponíveis para o dia '.date('d/m/Y', strtotime($agenda->agd_data)).'
+                                            <a href="#" class="btn btn-info btn-sm" data-toggle="collapse" data-target="#collapse'.$agenda->codigo.'" aria-expanded="true" aria-controls="collapseOne">
+                                                Horários disponíveis para o dia '.date('d/m/Y', strtotime($agenda->data)).'
                                             </a>
                                         </h5>
                                     </div>
@@ -51,17 +51,17 @@
                                 </div>
                             </div>
 
-                            <div id="collapse'.$agenda->agd_codigo.'" class="collapse" aria-labelledby="heading'.$agenda->agd_codigo.'" data-parent="#accordion">
+                            <div id="collapse'.$agenda->codigo.'" class="collapse" aria-labelledby="heading'.$agenda->codigo.'" data-parent="#accordion">
                                 <div class="card-body">
-                                <input type="hidden" name="data" value="'.$agenda->agd_data.'">
-                                <input type="hidden" name="cod" value="'.$agenda->agd_codigo.'">
+                                <input type="hidden" name="data" value="'.$agenda->data.'">
+                                <input type="hidden" name="cod" value="'.$agenda->codigo.'">
                                     <div class="col-8 mx-auto">
                                     <h5>Horários:</h5>';
 
-                                    $hrIni = intval(substr($agenda->agd_hora_ini,0,-6));
-                                    $hrFin = intval(substr($agenda->agd_hora_fin,0,-6));
-                                    $minIni = intval(substr($agenda->agd_hora_ini,3,-3));
-                                    $minFin = intval(substr($agenda->agd_hora_fin,3,-3));
+                                    $hrIni = intval(substr($agenda->horaIni,0,-6));
+                                    $hrFin = intval(substr($agenda->horaFin,0,-6));
+                                    $minIni = intval(substr($agenda->horaIni,3,-3));
+                                    $minFin = intval(substr($agenda->horaFin,3,-3));
 
                                     $minIni += $hrIni * 60;
                                     $minFin += $hrFin * 60;
@@ -80,7 +80,7 @@
                                         $resultados .= '
                                                         <div class="form-check form-check-inline">
                                                             <label class="form-control">
-                                                                <input type="radio" name="ativo'.$agenda->agd_codigo.'" value="'.$hora.':'.$minuto.'" checked> '.$hora.':'.$minuto.'
+                                                                <input type="radio" name="ativo'.$agenda->codigo.'" value="'.$hora.':'.$minuto.'" checked> '.$hora.':'.$minuto.'
                                                             </label>
                                                         </div>';
                                     }

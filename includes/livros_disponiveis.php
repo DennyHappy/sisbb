@@ -16,7 +16,7 @@
 
     $resultados = '';
     if (isset($livros)) {
-        foreach ($livros as $livro) {
+        foreach ($livros->content as $livro) {
             $resultados .= '<div class="col mb-3">
                                 <div class="card h-100">
                                     <div class="text-center mt-3 mb-3">
@@ -29,12 +29,12 @@
                                     
                                     <div class="card-body">
                                         <i class="fs-6">Titulo</i>
-                                        <h5 class="card-title text-center">'.$livro->lv_titulo.'</h5>
-                                        <i class="fs-6">Autor: </i><p class="card-text">'.$livro->lv_autor.'</p>
-                                        <i class="fs-6">Edição: </i><p class="card-text">'.$livro->lv_edicao.'</p>
-                                        <i class="fs-6">Ano: </i><p class="card-text">'.$livro->lv_ano.'</p>
-                                        <i class="fs-6">Volume: </i><p class="card-text">'.$livro->lv_volume.'</p>
-                                        <a href="add_carrinho.php?acao=add&id='.$livro->lv_cod_barras.'" class="btn btn-primary btn-sm">
+                                        <h5 class="card-title text-center">'.$livro->titulo.'</h5>
+                                        <i class="fs-6">Autor: </i><p class="card-text">'.$livro->autor.'</p>
+                                        <i class="fs-6">Edição: </i><p class="card-text">'.$livro->edicao.'</p>
+                                        <i class="fs-6">Ano: </i><p class="card-text">'.$livro->ano.'</p>
+                                        <i class="fs-6">Volume: </i><p class="card-text">'.$livro->volume.'</p>
+                                        <a href="add_carrinho.php?acao=add&id='.$livro->codBarras.'" class="btn btn-primary btn-sm">
                                         Add a reserva
                                             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                 <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
@@ -42,7 +42,7 @@
                                         </a>
                                     </div>
                                     <div class="card-footer">
-                                        <small class="text-muted">Cod. Barras: '.$livro->lv_cod_barras.'</small>
+                                        <small class="text-muted">Cod. Barras: '.$livro->codBarras.'</small>
                                     </div>
                                 </div>
                             </div>';
@@ -67,12 +67,12 @@
             </div>
             <div class="input-group-append">
                 <div class="input-group-text">
-                <INPUT TYPE="radio" NAME="ativo" VALUE="lv_titulo" CHECKED> Titulo
+                <INPUT TYPE="radio" NAME="ativo" VALUE="titulo" CHECKED> Titulo
                 </div>
             </div>
             <div class="input-group-append">
                 <div class="input-group-text">
-                <INPUT TYPE="radio" NAME="ativo" VALUE="lv_autor"> Autor
+                <INPUT TYPE="radio" NAME="ativo" VALUE="autor"> Autor
                 </div>
             </div>
         </div>

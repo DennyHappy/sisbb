@@ -24,6 +24,6 @@
                 </h1>
                 <p>Sistema de Biblioteca para Agendamento de Empréstimos de Livros</p>
                 <hr class="my-4">
-                <div class="text-right"><span> ÁREA DO BIBLIOTECÁRIO</span></div>
+                
             </div>
         

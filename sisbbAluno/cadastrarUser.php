@@ -1,14 +1,8 @@
 <?php
-require_once '../config.php';
 
-try {
-  //DEFINIÇÃOES DA API DE AUTENTICAÇÃO DO GOOGLE
-  $adapter->authenticate();
-  $userProfile = $adapter->getUserProfile();
+require __DIR__.'/../vendor/autoload.php';
 
-  $_SESSION['nome'] = $userProfile->displayName;
-  $_SESSION['email'] = $userProfile->email;
-  $_SESSION['identifier'] = $userProfile->identifier;
+session_start();
 
   if (isset($_POST['matricula'],$_POST['nome'],$_POST['email'],$_POST['idUser'])) {
     
@@ -43,9 +37,7 @@ try {
       exit;
     }
   
-}catch( Exception $e ){
-    echo $e->getMessage() ;
-}
+
 
 
 if (isset($_SESSION['email'])) {

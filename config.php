@@ -3,7 +3,7 @@
 include __DIR__.'/vendor/autoload.php';
 
 $config = [
-    'callback' => 'http://localhost/sisbb/sisbbAluno/cadastrarUser.php',
+    'callback' => 'http://localhost/sisbb/sisbbAluno/verificaUser.php',
     'keys'     => [
                     'id' => '895552023784-c5c521bf7ufl5i5cqg21cplgu2jcapmh.apps.googleusercontent.com',
                     'secret' => 'jV1dipSvocMKvOXbPCTDkFAz'

@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 
 import br.com.sisbib.api.modelo.Livro;
 import br.com.sisbib.api.modelo.Reserva;
+import br.com.sisbib.api.modelo.StatusReserva;
 import br.com.sisbib.api.modelo.TipoReserva;
 
 public class ReservaDto {
@@ -15,6 +16,7 @@ public class ReservaDto {
 	private TipoReserva tipoReserva;
 	private LocalDate dataReserva;
 	private LocalTime horaReserva;
+	private StatusReserva statusReserva;
 	private Long matricula;
 	private String nomeUsuario;
 	private Long codigoAgenda;
@@ -26,6 +28,7 @@ public class ReservaDto {
 		this.tipoReserva = reserva.getTipoReserva();
 		this.dataReserva = reserva.getDataReserva();
 		this.horaReserva = reserva.getHoraReserva();
+		this.statusReserva = reserva.getStatusReserva();
 		this.matricula = reserva.getRequisitante().getMatricula();
 		this.nomeUsuario = reserva.getRequisitante().getNome();
 		this.codigoAgenda = reserva.getAgenda().getCodigo();
@@ -49,6 +52,10 @@ public class ReservaDto {
 
 	public LocalTime getHoraReserva() {
 		return horaReserva;
+	}
+
+	public StatusReserva getStatusReserva() {
+		return statusReserva;
 	}
 
 	public Long getMatricula() {

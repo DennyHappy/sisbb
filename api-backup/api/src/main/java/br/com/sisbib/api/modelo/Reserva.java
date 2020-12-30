@@ -82,4 +82,8 @@ public class Reserva {
 	public List<Livro> getLivros() {
 		return livros;
 	}
+	
+	public void setStatusReserva(StatusReserva statusReserva) {
+		this.statusReserva = statusReserva;
+	}
 }

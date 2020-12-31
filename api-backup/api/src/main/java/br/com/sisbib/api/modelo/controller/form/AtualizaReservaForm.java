@@ -10,10 +10,18 @@ public class AtualizaReservaForm {
 	@NotNull
 	private StatusReserva statusReserva = StatusReserva.ATIVA;
 	
+	public StatusReserva getStatusReserva() {
+		return statusReserva;
+	}
+	
+	public void setStatusReserva(StatusReserva statusReserva) {
+		this.statusReserva = statusReserva;
+	}
+	
 	public Reserva atualizar(Long codigo, ReservaRepository reservaRepository) {
 		Reserva reserva = reservaRepository.getOne(codigo);
 		
-		reserva.setStatusReserva(statusReserva);
+		reserva.setStatusReserva(this.statusReserva);
 		
 		return reserva;
 	}

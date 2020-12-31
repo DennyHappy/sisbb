@@ -8,7 +8,7 @@ import br.com.sisbib.api.modelo.repository.ReservaRepository;
 
 public class AtualizaReservaForm {
 	@NotNull
-	private StatusReserva statusReserva;
+	private StatusReserva statusReserva = StatusReserva.ATIVA;
 	
 	public Reserva atualizar(Long codigo, ReservaRepository reservaRepository) {
 		Reserva reserva = reservaRepository.getOne(codigo);

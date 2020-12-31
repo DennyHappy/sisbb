@@ -69,7 +69,7 @@ public class ReservaController {
 		Optional<Reserva> optional = reservaRepository.findById(codigo);
 		if (optional.isPresent()) {
 			Reserva reserva = form.atualizar(codigo, reservaRepository);
-			return ResponseEntity.ok(new ReservaDto(reserva));	
+			return ResponseEntity.ok(new ReservaDto(reserva));
 		} else {
 			return ResponseEntity.notFound().build();
 		}

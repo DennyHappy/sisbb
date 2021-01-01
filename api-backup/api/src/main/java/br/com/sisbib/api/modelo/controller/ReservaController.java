@@ -21,9 +21,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import br.com.sisbib.api.modelo.Agenda;
 import br.com.sisbib.api.modelo.Reserva;
 import br.com.sisbib.api.modelo.controller.dto.ReservaDto;
 import br.com.sisbib.api.modelo.controller.form.AtualizaReservaForm;
+import br.com.sisbib.api.modelo.controller.form.ReagendaReservaForm;
 import br.com.sisbib.api.modelo.controller.form.ReservaForm;
 import br.com.sisbib.api.modelo.repository.AgendaRepository;
 import br.com.sisbib.api.modelo.repository.LivroRepository;
@@ -73,6 +75,21 @@ public class ReservaController {
 		} else {
 			return ResponseEntity.notFound().build();
 		}
+	}
+	
+	@PutMapping("/reagendar/{codigo}")
+	@Transactional
+	public ResponseEntity<ReservaDto> reagendar(@PathVariable Long codigo, @RequestBody @Valid ReagendaReservaForm form) {
+		Optional<Reserva> optional = reservaRepository.findById(codigo);
+		if (optional.isPresent()) {
+			Long codigoAgenda = form.getCodigoAgenda();
+			Optional<Agenda> agenda = agendaRepository.findById(codigoAgenda);
+			if(agenda.isPresent()) {
+				Reserva reserva = form.atualizar(codigo, reservaRepository, agenda.get());
+				return ResponseEntity.ok(new ReservaDto(reserva));
+			}
+		}
+		return ResponseEntity.notFound().build();
 	}
 	
 //	@GetMapping("/{id}")

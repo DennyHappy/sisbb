@@ -86,4 +86,16 @@ public class Reserva {
 	public void setStatusReserva(StatusReserva statusReserva) {
 		this.statusReserva = statusReserva;
 	}
+	
+	public void setDataReserva(LocalDate dataReserva) {
+		this.dataReserva = dataReserva;
+	}
+	
+	public void setHoraReserva(LocalTime horaReserva) {
+		this.horaReserva = horaReserva;
+	}
+	
+	public void setAgenda(Agenda agenda) {
+		this.agenda = agenda;
+	}
 }

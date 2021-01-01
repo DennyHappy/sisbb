@@ -15,7 +15,7 @@
     }
 
     $resultados = '';
-    if (isset($livros)) {
+    if (isset($livros->content)) {
         foreach ($livros->content as $livro) {
             $resultados .= '<div class="col mb-3">
                                 <div class="card h-100">
@@ -49,7 +49,7 @@
         }
     }else{
         $resultados .= '<div class="alert alert-warning" role="alert">
-                            <h5>Nenhuma busca feita no momento!</h5>
+                            <h5>Nenhuma busca ou resultado retornado no momento!</h5>
                         </div>';
     }
     
@@ -102,7 +102,7 @@
     <hr>
 
     <section> <!--style="overflow-x: scroll; overflow-y: hidden; white-space: nowrap;">-->
-        <?=(isset($livros) ? '<div class="row row-cols-1 row-cols-md-4">' : '<div class="col-12 text-center">')?>
+        <?=(isset($livros->content) ? '<div class="row row-cols-1 row-cols-md-4">' : '<div class="col-12 text-center">')?>
             <?=$resultados?>
         </div>
     </section>

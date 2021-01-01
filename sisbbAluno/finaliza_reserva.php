@@ -1,78 +1,195 @@
 <?php
 
-require __DIR__.'/../../vendor/autoload.php';
+require __DIR__.'/../vendor/autoload.php';
 
-use \App\Entity\Reserva;
-use \App\Entity\Itens_Reserva;
-use \App\Entity\Livro;
+//use \App\Entity\Reserva;
+//use \App\Entity\Itens_Reserva;
+//use \App\Entity\Livro;
 
 session_start();
 
 $param = $_GET['hora'];
 
 //CONSULTA RESERVA
-$obReserva1 = Reserva::getReserva_2('"'.$_POST['data'].'"','"'.$_POST[$param].':00"');
 
-//echo "<pre>"; print_r($obReserva1); echo "</pre>"; exit;
+$curl = curl_init();
 
-if ($obReserva1 == NULL) {
+curl_setopt_array($curl, array(
+  CURLOPT_URL => 'http://localhost:8080/reserva',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'GET',
+));
+
+$response = curl_exec($curl);
+
+curl_close($curl);
+
+$reservas = json_decode($response);
+
+if ($reservas->content == []) {
     //VALIDAÇÃO DO POST
     if (isset($_POST[$param],$_POST['data'],$_POST['cod'])) {
-        $obReserva = new Reserva;
-        $obReserva->rsv_data_reserva = $_POST['data'];
-        $obReserva->rsv_hora_reserva = $_POST[$param].':00';
-        $obReserva->rsv_matricula_userC = $_SESSION['matricula'];
-        $obReserva->rsv_codigo_agenda = $_POST['cod'];
-        
-        //echo "<pre>"; print_r($obReserva); echo "</pre>"; exit;
-        $obReserva->cadastrar();
-        $codReserva = $obReserva->rsv_codigo;
-        //echo "<pre>"; print_r($codLivro); echo "</pre>"; exit;
+        $cods = [];
 
-        if (isset($codReserva,$_SESSION['dados'])) {
-            foreach ($_SESSION['dados'] as $cod_livro) {
-                $obItReserva = new Itens_Reserva;
-                $obItReserva->it_rsv_cod_reserva = $codReserva;
-                $obItReserva->it_rsv_cod_barra_livro = $cod_livro['lv_cod_barras'];
-
-                //echo "<pre>"; print_r($obItReserva); echo "</pre>"; exit;
-                $obItReserva->cadastrar();
-
-                //CONSULTA LIVRO
-                $obLivro = Livro::getLivro($cod_livro['lv_cod_barras']);
-
-                //echo "<pre>"; print_r($obLivro); echo "</pre>"; exit;
-
-                //VALIDAÇÃO DO LIVRO
-                if ($obLivro instanceof Livro) {
-                    $obLivro->lv_situacao = 'emprestado';
-                    $obLivro->atualizar_situacao();
-                }
-
-                /*if (isset($_SESSION['carrinho'],$_SESSION['dados'])) {
-
-                    $cont = count($_SESSION['dados']);
-                    //echo "<pre>"; print_r($cont); echo "</pre>"; exit;
-                    for ($i=0; $i < $cont; $i++) { 
-                        unset($_SESSION['carrinho']['lv_cod_barras']);
-                        unset($_SESSION['dados'][$i]);
-                    }
-                }*/
-
-                $_SESSION['carrinho'] = [];
-                $_SESSION['dados'] = [];
-                
-            }
-
+        foreach ($_SESSION['dados'] as $cod_livro) {
+          array_push($cods,$cod_livro['codBarras']);
         }
 
-        header('location: ver_minhas_reservas.php?mtc='.$_SESSION['matricula'].'&status=successCadastroRsv');
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+          CURLOPT_URL => 'http://localhost:8080/reserva',
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => '',
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 0,
+          CURLOPT_FOLLOWLOCATION => true,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => 'POST',
+          CURLOPT_POSTFIELDS =>'{
+            "tipoReserva": "RETIRADA",
+            "dataReserva": "'.$_POST['data'].'",
+            "horaReserva": "'.$_POST[$param].':00",
+            "matricula": '.$_SESSION['mtcl'].',
+            "nomeUsuario": "'.$_SESSION['nome'].'",
+            "codigoAgenda": '.$_POST['cod'].',
+            "codBarras": [],
+            "titulos": []
+        }',
+          CURLOPT_HTTPHEADER => array(
+            'Content-Type: application/json'
+          ),
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+        
+        //$obReserva = json_decode($response);
+
+        //ADICIONA OS LIVROS A RESERVA
+        if (isset($_SESSION['dados'])) {
+          
+          foreach ($_SESSION['dados'] as $cod_livro) {
+            
+            $curl = curl_init();
+
+            curl_setopt_array($curl, array(
+              CURLOPT_URL => 'http://localhost:8080/livro/'.$cod_livro['codBarras'],
+              CURLOPT_RETURNTRANSFER => true,
+              CURLOPT_ENCODING => '',
+              CURLOPT_MAXREDIRS => 10,
+              CURLOPT_TIMEOUT => 0,
+              CURLOPT_FOLLOWLOCATION => true,
+              CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+              CURLOPT_CUSTOMREQUEST => 'PUT',
+              CURLOPT_POSTFIELDS =>'{
+                "situacao": "EMPRESTADO",
+                "dataQuarentena": null
+            }',
+              CURLOPT_HTTPHEADER => array(
+                'Content-Type: application/json'
+              ),
+            ));
+
+            $response = curl_exec($curl);
+
+            curl_close($curl);
+            //echo $response;
+          }
+        }
+
+        $_SESSION['carrinho'] = [];
+        $_SESSION['dados'] = [];
+
+        header('location: ver_minhas_reservas.php?mtcl='.$_SESSION['mtcl'].'&status=successCadastroRsv');
         exit;
     }else{
         header('location: ver_horarios.php?status=errorCadastroRsv');
         exit;
     }
 }else{
-    header('location: ver_horarios.php?status=errorCadastroRsv');
-    exit;
+    foreach ($reservas->content as $rsv) {
+        if ($rsv->dataReserva == '"'.$_POST['data'].'"' && $rsv->horaReserva == '"'.$_POST[$param].':00"') {
+            header('location: ver_horarios.php?status=errorCadastroRsv');
+            exit;
+        }else{
+            $cods = [];
+
+            foreach ($_SESSION['dados'] as $cod_livro) {
+              array_push($cods,$cod_livro['codBarras']);
+            }
+            
+            $curl = curl_init();
+
+            curl_setopt_array($curl, array(
+              CURLOPT_URL => 'http://localhost:8080/reserva',
+              CURLOPT_RETURNTRANSFER => true,
+              CURLOPT_ENCODING => '',
+              CURLOPT_MAXREDIRS => 10,
+              CURLOPT_TIMEOUT => 0,
+              CURLOPT_FOLLOWLOCATION => true,
+              CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+              CURLOPT_CUSTOMREQUEST => 'POST',
+              CURLOPT_POSTFIELDS =>'{
+                "tipoReserva": "RETIRADA",
+                "dataReserva": "'.$_POST['data'].'",
+                "horaReserva": "'.$_POST[$param].':00",
+                "matricula": '.$_SESSION['mtcl'].',
+                "nomeUsuario": "'.$_SESSION['nome'].'",
+                "codigoAgenda": '.$_POST['cod'].',
+                "codBarras": ['.implode(",", $cods).'],
+                "titulos": []
+            }',
+              CURLOPT_HTTPHEADER => array(
+                'Content-Type: application/json'
+              ),
+            ));
+
+            $response = curl_exec($curl);
+
+            curl_close($curl);
+            
+            //$obReserva = json_decode($response);
+
+            if (isset($_SESSION['dados'])) {
+              foreach ($_SESSION['dados'] as $cod_livro) {
+                $curl = curl_init();
+
+                curl_setopt_array($curl, array(
+                  CURLOPT_URL => 'http://localhost:8080/livro/'.$cod_livro['codBarras'],
+                  CURLOPT_RETURNTRANSFER => true,
+                  CURLOPT_ENCODING => '',
+                  CURLOPT_MAXREDIRS => 10,
+                  CURLOPT_TIMEOUT => 0,
+                  CURLOPT_FOLLOWLOCATION => true,
+                  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                  CURLOPT_CUSTOMREQUEST => 'PUT',
+                  CURLOPT_POSTFIELDS =>'{
+                    "situacao": "EMPRESTADO",
+                    "dataQuarentena": null
+                }',
+                  CURLOPT_HTTPHEADER => array(
+                    'Content-Type: application/json'
+                  ),
+                ));
+
+                $response = curl_exec($curl);
+
+                curl_close($curl);
+                //echo $response;
+              }
+            }
+          $_SESSION['carrinho'] = [];
+          $_SESSION['dados'] = [];
+
+          header('location: ver_minhas_reservas.php?mtcl='.$_SESSION['mtcl'].'&status=successCadastroRsv');
+          exit;
+        }
+    }
 }

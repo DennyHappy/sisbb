@@ -22,7 +22,7 @@
                             <?=(!empty($_SESSION['dados']) ? count($_SESSION['carrinho']) : '0')?>
                         </span>
                     </a>
-                    <a href="ver_minhas_reservas.php?mtc=<?=$_SESSION['matricula']?>" class="btn btn-info btn-sm">Minhas Reservas</a>
+                    <a href="ver_minhas_reservas.php?mtcl=<?=$_SESSION['mtcl']?>" class="btn btn-info btn-sm">Minhas Reservas</a>
                     <a href="../logout.php" class="btn btn-info btn-sm active">Sair</a>
                 </div>
             </div>

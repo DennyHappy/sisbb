@@ -24,23 +24,26 @@
     }
 
     $resultados = '';
-    foreach ($obReservas as $reserva) {
-        $resultados .= '<tr>
-                            <td class="text-center">'.$reserva->rsv_codigo.'</td>
-                            <td class="text-center">'.$reserva->rsv_tipo_reserva.'</td>
-                            <td class="text-center">'.date('d/m/Y', strtotime($reserva->rsv_data_reserva)).'</td>
-                            <td class="text-center">'.$reserva->rsv_hora_reserva.'</td>
-                            <td class="text-center">'.$reserva->rsv_matricula_userC.'</td>
-                            <td class="text-center">'.($reserva->rsv_status_reserva == 'ativa' ? '<span class=" btn btn-warning btn-sm">Ativa</span>' : '<span class="btn btn-success btn-sm">Concluida</span>').'</td>
-                            <td class="text-center">
-                                <a class="btn btn-secondary btn-sm" href="ver_itens.php?id='.$reserva->rsv_codigo.'">
-                                    Ver itens
-                                </a>
-                                <a class="btn btn-primary btn-sm" href="editar_reserva.php?id='.$reserva->rsv_codigo.'">
-                                    Editar
-                                </a>
-                            </td>
-                        </tr>';
+    foreach ($obReservas->content as $reserva) {
+        if ($reserva->codigoAgenda == $_GET['id']) {
+            
+            $resultados .= '<tr>
+                                <td class="text-center">'.$reserva->codigo.'</td>
+                                <td class="text-center">'.$reserva->tipoReserva.'</td>
+                                <td class="text-center">'.date('d/m/Y', strtotime($reserva->dataReserva)).'</td>
+                                <td class="text-center">'.$reserva->horaReserva.'</td>
+                                <td class="text-center">'.$reserva->matricula.'</td>
+                                <td class="text-center">'.($reserva->statusReserva == 'ATIVA' ? '<span class=" btn btn-warning btn-sm">Ativa</span>' : '<span class="btn btn-success btn-sm">Concluida</span>').'</td>
+                                <td class="text-center">
+                                    <a class="btn btn-secondary btn-sm" href="ver_itens.php?id='.$reserva->codigo.'">
+                                        Ver itens
+                                    </a>
+                                    <a class="btn btn-primary btn-sm" href="editar_reserva.php?id='.$reserva->codigo.'">
+                                        Editar
+                                    </a>
+                                </td>
+                            </tr>';
+        }
     }
 
 ?>

@@ -40,7 +40,7 @@
             
             case 'errorExclusao':
                 $mensagem = '<div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
-                                <strong>Problemas para excluir a agenda!</strong>
+                                <strong>Impossivel excluir agenda!<br>Existem reservas ativas no momento na agenda '.$_GET['idAgd'].'!</strong>
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                                 </button>

@@ -58,40 +58,52 @@
     if (isset($_POST['buscar_livro'])) {
     	$curl = curl_init();
 
-    	curl_setopt_array($curl, array(
-    	  CURLOPT_URL => 'http://localhost:8080/livro/?situacao=\'DISPONIVEL\'',
-    	  CURLOPT_RETURNTRANSFER => true,
-    	  CURLOPT_ENCODING => '',
-    	  CURLOPT_MAXREDIRS => 10,
-    	  CURLOPT_TIMEOUT => 0,
-    	  CURLOPT_FOLLOWLOCATION => true,
-    	  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-    	  CURLOPT_CUSTOMREQUEST => 'GET',
-    	));
+        curl_setopt_array($curl, array(
+          CURLOPT_URL => 'http://localhost:8080/livro/',
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => '',
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 0,
+          CURLOPT_FOLLOWLOCATION => true,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => 'GET',
+        ));
 
-    	$response = curl_exec($curl);
+        $response = curl_exec($curl);
 
-    	curl_close($curl);
+        curl_close($curl);
+        //echo $response;
 
     	$livros = json_decode($response);
 
     	//echo "<pre>"; print_r($livros); echo "</pre>"; exit;
-
-    	foreach ($livros as $livro) {
-        $resultados .= '<tr>
-        					<td class="text-center">'.$livro->codBarra.'</td>
-        					<td class="text-center">'.$livro->patrimonio.'</td>
-        					<td class="text-center">'.$livro->localizacao.'</td>
-                            <td class="text-center">'.$livro->titulo.'</td>
-                            <td class="text-center">'.$livro->autor.'</td>
-                            <td class="text-center">'.$livro->edicao.'</td>
-                            <td class="text-center">'.$livro->ano.'</td>
-                            <td class="text-center">'.$livro->volume.'</td>
-                            <td class="text-center">
-                                <span class=" btn btn-secondary btn-sm">S/A</span>
-                            </td>
-                        </tr>';
-        }
+        
+            
+            if ($livros == NULL) {
+                $resultados .= '
+                            <td colspan="9" class="text-center">
+                                <div class="alert alert-warning" role="alert">
+                                    <h5>Nenhum Livro Cadastrado!</h5>
+                                </div>
+                            </td>';
+            }else{
+            	foreach ($livros->content as $livro) {
+                    $resultados .= '<tr>
+                    					<td class="text-center">'.$livro->codBarras.'</td>
+                    					<td class="text-center">'.$livro->patrimonio.'</td>
+                    					<td class="text-center">'.$livro->localizacao.'</td>
+                                        <td class="text-center">'.$livro->titulo.'</td>
+                                        <td class="text-center">'.$livro->autor.'</td>
+                                        <td class="text-center">'.$livro->edicao.'</td>
+                                        <td class="text-center">'.$livro->ano.'</td>
+                                        <td class="text-center">'.$livro->volume.'</td>
+                                        <td class="text-center">
+                                            <span class=" btn btn-secondary btn-sm">S/A</span>
+                                        </td>
+                                    </tr>';
+                }
+            }
+        
     }else{
         $resultados .= '
         				<td colspan="9" class="text-center">

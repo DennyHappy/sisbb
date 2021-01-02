@@ -65,6 +65,16 @@ public class ReservaController {
 		return ResponseEntity.created(uri).body(new ReservaDto(reserva));
 	}
 	
+	@GetMapping("/{codigo}")
+	public ResponseEntity<ReservaDto> detalhar(@PathVariable Long codigo) {
+		Optional<Reserva> reserva = reservaRepository.findById(codigo);
+		if (reserva.isPresent()) {
+			return ResponseEntity.ok(new ReservaDto(reserva.get()));	
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+	}
+	
 	@PutMapping("/{codigo}")
 	@Transactional
 	public ResponseEntity<ReservaDto> atualizar(@PathVariable Long codigo, @RequestBody @Valid AtualizaReservaForm form) {
@@ -91,39 +101,4 @@ public class ReservaController {
 		}
 		return ResponseEntity.notFound().build();
 	}
-	
-//	@GetMapping("/{id}")
-//	public ResponseEntity<DetalhesTopicoDto> detalhar(@PathVariable Long id) {
-//		Optional<Topico> topico = topicoRepository.findById(id);
-//		if (topico.isPresent()) {
-//			return ResponseEntity.ok(new DetalhesTopicoDto(topico.get()));	
-//		} else {
-//			return ResponseEntity.notFound().build();
-//		}
-//	}
-//
-//	@PutMapping("/{id}")
-//	@Transactional
-//	public ResponseEntity<TopicoDto> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizacaoTopicoForm form) {
-//		Optional<Topico> optional = topicoRepository.findById(id);
-//		if (optional.isPresent()) {
-//			Topico topico = form.atualizar(id, topicoRepository);
-//			return ResponseEntity.ok(new TopicoDto(topico));	
-//		} else {
-//			return ResponseEntity.notFound().build();
-//		}
-//	}
-//	
-//	@DeleteMapping("/{id}")
-//	@Transactional
-//	public ResponseEntity<?> deletar(@PathVariable Long id) {
-//		Optional<Topico> optional = topicoRepository.findById(id);
-//		if (optional.isPresent()) {
-//			topicoRepository.deleteById(id);
-//			return ResponseEntity.ok().build();
-//		} else {
-//			return ResponseEntity.notFound().build();
-//		}
-//	}
-	
 }

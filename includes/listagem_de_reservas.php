@@ -38,7 +38,7 @@
                                     <a class="btn btn-secondary btn-sm" href="ver_itens.php?id='.$reserva->codigo.'">
                                         Ver itens
                                     </a>
-                                    <a class="btn btn-primary btn-sm" href="editar_reserva.php?id='.$reserva->codigo.'">
+                                    <a class="btn btn-primary btn-sm" href="editar_reserva.php?id='.$reserva->codigo.'&cdag='.$reserva->codigoAgenda.'">
                                         Editar
                                     </a>
                                 </td>

@@ -10,13 +10,13 @@
 
     <form method="post">
         <div class="form-group">
-            <p>Você deseja realmente alterar a reserva para <strong><?=($obReserva->rsv_status_reserva == 'ativa' ? '<span class="btn btn-success btn-sm">Concluida</span>' : '<span class=" btn btn-warning btn-sm">Ativa</span>')?></strong> ?</p>
+            <p>Você deseja realmente alterar a reserva para <strong><?=($obReserva->statusReserva == 'ATIVA' ? '<span class="btn btn-success btn-sm">Concluida</span>' : '<span class=" btn btn-warning btn-sm">Ativa</span>')?></strong> ?</p>
             
         </div>
 
         <div class="form-group">
-            <input type="hidden" name="rsv_status_reserva" value="<?=($obReserva->rsv_status_reserva == 'ativa' ? 'concluida' : 'ativa')?>">
-            <input type="hidden" name="rsv_codigo" value="<?=$obReserva->rsv_codigo?>">
+            <input type="hidden" name="statusReserva" value="<?=($obReserva->statusReserva == 'ATIVA' ? 'CONCLUIDA' : 'ATIVA')?>">
+            <input type="hidden" name="codigo" value="<?=$obReserva->codigo?>">
             <a href="<?=$_SERVER['HTTP_REFERER']?>" class="btn btn-success">
             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-return-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z"/>

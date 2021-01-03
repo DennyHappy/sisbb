@@ -58,7 +58,7 @@ if ($reservas->content == []) {
             "matricula": '.$_SESSION['mtcl'].',
             "nomeUsuario": "'.$_SESSION['nome'].'",
             "codigoAgenda": '.$_POST['cod'].',
-            "codBarras": [],
+            "codBarras": ['.implode(",", $cods).'],
             "titulos": []
         }',
           CURLOPT_HTTPHEADER => array(

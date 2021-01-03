@@ -20,6 +20,14 @@
                                 </button>
                             </div>';
                 break;
+            case 'errorCadastraDvlc':
+                $mensagem = '<div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+                                <strong>Reserva Reagendada com sucesso!</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>';
+                break;
         }
     }
 
@@ -54,7 +62,7 @@
                                         }
                                         if ($reserva->statusReserva == 'CONCLUIDA') {
                                             $resultados .= '
-                                            <a class="btn btn-info btn-sm" href="cadastra_devolucao.php?codRsv='.$reserva->codigo.'">
+                                            <a class="btn btn-info btn-sm" href="cadastra_devolucao.php?codRsv='.$reserva->codigo.'&?mtcl='.$_SESSION['mtcl'].'">
                                                 Reservar Devolução
                                             </a>
                                             ';

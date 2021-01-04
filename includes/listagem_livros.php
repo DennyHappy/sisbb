@@ -22,39 +22,97 @@
         }
     }
 
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+      CURLOPT_URL => 'http://localhost:8080/reserva',
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_ENCODING => '',
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 0,
+      CURLOPT_FOLLOWLOCATION => true,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => 'GET',
+    ));
+
+    $response = curl_exec($curl);
+
+    curl_close($curl);
+    //echo $response;
+
+    $rsvs = json_decode($response);
+
     $resultados = '';
     foreach ($livros->content as $livro) {
-        $resultados .= '<tr>
-                            <td class="text-center">'.$livro->codBarras.'</td>
-                            <td class="text-center">'.$livro->patrimonio.'</td>
-                            <td class="text-center">'.$livro->localizacao.'</td>
+        if ($_GET['situacao'] == 'EMPRESTADO') {
+            foreach ($rsvs->content as $rsv) {
+                if (in_array($livro->codBarras, $rsv->codBarras) && $rsv->tipoReserva == 'DEVOLUCAO' && $rsv->statusReserva == 'CONCLUIDA') {
+                    $resultados .= '<tr>
+                                        <td class="text-center">'.$livro->codBarras.'</td>
+                                        <td class="text-center">'.$livro->patrimonio.'</td>
+                                        <td class="text-center">'.$livro->localizacao.'</td>
 
-                            
+                                        
 
-                            <td class="text-center">'.$livro->titulo.'</td>
-                            <td class="text-center">'.$livro->autor.'</td>
-                            <td class="text-center">'.$livro->edicao.'</td>
-                            <td class="text-center">'.$livro->ano.'</td>
-                            <td class="text-center">'.$livro->volume.'</td>
+                                        <td class="text-center">'.$livro->titulo.'</td>
+                                        <td class="text-center">'.$livro->autor.'</td>
+                                        <td class="text-center">'.$livro->edicao.'</td>
+                                        <td class="text-center">'.$livro->ano.'</td>
+                                        <td class="text-center">'.$livro->volume.'</td>
 
-                            
+                                        
 
-                            '.(TITLE == 'Livros em Quarentena' ? '
-                            <td class="text-center">'.date('d/m/Y', strtotime($livro->dataQuarentena)).'</td>
-                            ':'').'
+                                        '.(TITLE == 'Livros em Quarentena' ? '
+                                        <td class="text-center">'.date('d/m/Y', strtotime($livro->dataQuarentena)).'</td>
+                                        ':'').'
 
-                            '.($livro->situacao == 'QUARENTENA' || $livro->situacao == 'EMPRESTADO' ? '
-                            <td class="text-center">
-                                <a class="btn btn-primary btn-sm" href="editar_livro.php?id='.$livro->codBarras.'">
-                                    Editar
-                                </a>
-                            </td>
-                            ' : '
-                            <td class="text-center">
-                                <span class=" btn btn-secondary btn-sm">S/A</span>
-                            </td>').'
+                                        '.($livro->situacao == 'QUARENTENA' || $livro->situacao == 'EMPRESTADO' ? '
+                                        <td class="text-center">
+                                            <a class="btn btn-primary btn-sm" href="editar_livro.php?id='.$livro->codBarras.'">
+                                                Editar
+                                            </a>
+                                        </td>
+                                        ' : '
+                                        <td class="text-center">
+                                            <span class=" btn btn-secondary btn-sm">S/A</span>
+                                        </td>').'
 
-                        </tr>';
+                                    </tr>';
+                }
+            }
+        }else{
+            $resultados .= '<tr>
+                                <td class="text-center">'.$livro->codBarras.'</td>
+                                <td class="text-center">'.$livro->patrimonio.'</td>
+                                <td class="text-center">'.$livro->localizacao.'</td>
+
+                                
+
+                                <td class="text-center">'.$livro->titulo.'</td>
+                                <td class="text-center">'.$livro->autor.'</td>
+                                <td class="text-center">'.$livro->edicao.'</td>
+                                <td class="text-center">'.$livro->ano.'</td>
+                                <td class="text-center">'.$livro->volume.'</td>
+
+                                
+
+                                '.(TITLE == 'Livros em Quarentena' ? '
+                                <td class="text-center">'.date('d/m/Y', strtotime($livro->dataQuarentena)).'</td>
+                                ':'').'
+
+                                '.($livro->situacao == 'QUARENTENA' || $livro->situacao == 'EMPRESTADO' ? '
+                                <td class="text-center">
+                                    <a class="btn btn-primary btn-sm" href="editar_livro.php?id='.$livro->codBarras.'">
+                                        Editar
+                                    </a>
+                                </td>
+                                ' : '
+                                <td class="text-center">
+                                    <span class=" btn btn-secondary btn-sm">S/A</span>
+                                </td>').'
+
+                            </tr>';
+        }
     }
 
 ?>

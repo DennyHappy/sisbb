@@ -22,7 +22,7 @@ $param = $_GET['hora'];
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-          CURLOPT_URL => 'http://localhost:8080/reserva/reagendar/'.$_POST['rsv_codigo'],
+          CURLOPT_URL => 'http://localhost:8080/reserva/reagendar/'.$_POST['codigo'],
           CURLOPT_RETURNTRANSFER => true,
           CURLOPT_ENCODING => '',
           CURLOPT_MAXREDIRS => 10,

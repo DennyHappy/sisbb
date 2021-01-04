@@ -21,6 +21,15 @@
                                 </button>
                             </div>';
                 break;
+
+            case 'errorCadastraDvlc':
+                $mensagem = '<div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+                                <strong>Problemas ao cadastrar a devolução! <br>Horário já ocupado! <br>Escolha outro horário!</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>';
+                break;
         }
     }
 
@@ -29,7 +38,11 @@
         $resultados .= '<div class="card">';
                         if (isset($_GET['codRsv'])) {
                             $resultados .= '<form action="reagendar.php?hora=ativo'.$agenda->codigo.'" method="post">
-                                                <input type="hidden" name="rsv_codigo" value="'.$_GET['codRsv'].'">
+                                                <input type="hidden" name="codigo" value="'.$_GET['codRsv'].'">
+                                            ';
+                        }elseif(isset($_GET['codRsvPD'])){
+                            $resultados .= '<form action="cadastra_devolucao.php?hora=ativo'.$agenda->codigo.'&codRsvPD='.$_GET['codRsvPD'].'" method="post">
+                                            
                                             ';
                         }else{
                             $resultados .= '<form action="finaliza_reserva.php?hora=ativo'.$agenda->codigo.'" method="post">';

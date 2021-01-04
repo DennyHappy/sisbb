@@ -30,7 +30,7 @@ public class Reserva {
 	private StatusReserva statusReserva = StatusReserva.ATIVA;
 	
 	@ManyToOne
-	private UsuarioComum requisitante;
+	private Usuario requisitante;
 	
 	@ManyToOne
 	private Agenda agenda;
@@ -43,7 +43,7 @@ public class Reserva {
 		
 	}
 
-	public Reserva(TipoReserva tipoReserva, LocalDate dataReserva, LocalTime horaReserva, UsuarioComum requisitante,
+	public Reserva(TipoReserva tipoReserva, LocalDate dataReserva, LocalTime horaReserva, Usuario requisitante,
 			Agenda agenda, List<Livro> livros) {
 		this.tipoReserva = tipoReserva;
 		this.dataReserva = dataReserva;
@@ -73,7 +73,7 @@ public class Reserva {
 		return statusReserva;
 	}
 
-	public UsuarioComum getRequisitante() {
+	public Usuario getRequisitante() {
 		return requisitante;
 	}
 

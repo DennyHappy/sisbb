@@ -3,9 +3,9 @@ package br.com.sisbib.api.modelo.controller.form;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import br.com.sisbib.api.modelo.UsuarioComum;
+import br.com.sisbib.api.modelo.Usuario;
 
-public class UsuarioComumForm {
+public class UsuarioForm {
 	@NotNull
 	private Long matricula;
 	@NotNull @NotEmpty
@@ -47,7 +47,7 @@ public class UsuarioComumForm {
 		this.idUser = idUser;
 	}
 
-	public UsuarioComum converter() {
-		return new UsuarioComum(matricula, nome, email, idUser);
+	public Usuario converter() {
+		return new Usuario(matricula, nome, email, idUser);
 	}
 }

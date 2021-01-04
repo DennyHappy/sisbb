@@ -1,6 +1,7 @@
 package br.com.sisbib.api.modelo.controller;
 
 import java.net.URI;
+
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -30,7 +31,7 @@ import br.com.sisbib.api.modelo.controller.form.ReservaForm;
 import br.com.sisbib.api.modelo.repository.AgendaRepository;
 import br.com.sisbib.api.modelo.repository.LivroRepository;
 import br.com.sisbib.api.modelo.repository.ReservaRepository;
-import br.com.sisbib.api.modelo.repository.UsuarioComumRepository;
+import br.com.sisbib.api.modelo.repository.UsuarioRepository;
 
 @RestController
 @RequestMapping("/reserva")
@@ -43,7 +44,7 @@ public class ReservaController {
 	private AgendaRepository agendaRepository;
 	
 	@Autowired
-	private UsuarioComumRepository usuarioComumRepository;
+	private UsuarioRepository usuarioRepository;
 	
 	@Autowired
 	private LivroRepository livroRepository;
@@ -58,7 +59,7 @@ public class ReservaController {
 	@PostMapping
 	@Transactional
 	public ResponseEntity<ReservaDto> cadastrar(@RequestBody @Valid ReservaForm form, UriComponentsBuilder uriBuilder) {
-		Reserva reserva = form.converter(agendaRepository, usuarioComumRepository, livroRepository);
+		Reserva reserva = form.converter(agendaRepository, usuarioRepository, livroRepository);
 		reservaRepository.save(reserva);
 		
 		URI uri = uriBuilder.path("/reserva/{codigo}").buildAndExpand(reserva.getCodigo()).toUri();

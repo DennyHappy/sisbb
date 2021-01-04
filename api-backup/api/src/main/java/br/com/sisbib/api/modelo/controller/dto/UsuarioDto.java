@@ -1,24 +1,29 @@
 package br.com.sisbib.api.modelo.controller.dto;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 
-import br.com.sisbib.api.modelo.UsuarioComum;
+import br.com.sisbib.api.modelo.Perfil;
+import br.com.sisbib.api.modelo.Usuario;
 
-public class UsuarioComumDto {
+public class UsuarioDto {
 	private Long matricula;
 	private String nome;
 	private String email;
 	private String idUser;
+	List<Perfil> perfis;
 	
-	public UsuarioComumDto(UsuarioComum usuario) {
+	public UsuarioDto(Usuario usuario) {
 		this.matricula = usuario.getMatricula();
 		this.nome = usuario.getNome();
 		this.email = usuario.getEmail();
 		this.idUser = usuario.getIdUser();
+		this.perfis = usuario.getPerfis();
 	}
 
-	public static Page<UsuarioComumDto> converter(Page<UsuarioComum> usuarios) {
-		return usuarios.map(UsuarioComumDto::new);
+	public static Page<UsuarioDto> converter(Page<Usuario> usuarios) {
+		return usuarios.map(UsuarioDto::new);
 	}
 
 	public Long getMatricula() {
@@ -35,5 +40,9 @@ public class UsuarioComumDto {
 	
 	public String getIdUser() {
 		return idUser;
+	}
+	
+	public List<Perfil> getPerfis() {
+		return perfis;
 	}
 }

@@ -1,11 +1,13 @@
 package br.com.sisbib.api.modelo;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Livro {
@@ -22,6 +24,9 @@ public class Livro {
 	
 	@Enumerated(EnumType.STRING)
 	private SituacaoLivro situacao = SituacaoLivro.DISPONIVEL;
+	
+	@ManyToMany(mappedBy = "livros")
+	private List<Reserva> reservas;
 	
 	public Livro() {
 		

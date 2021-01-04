@@ -10,8 +10,7 @@ session_start();
 
 $param = $_GET['hora'];
 
-//CONSULTA RESERVA
-
+//CONSULTA RESERVAS
 $curl = curl_init();
 
 curl_setopt_array($curl, array(

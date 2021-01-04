@@ -1,10 +1,11 @@
 <?php
 
     $resultados = '';
-    foreach ($obItensReservas as $it_reserva) {
+    for ($i=0; $i < count($obItensReservas->codBarras); $i++) { 
+        
         $resultados .= '<tr>
-                            <td class="text-center">'.$it_reserva->it_rsv_codigo.'</td>
-                            <td class="text-center">'.$it_reserva->it_rsv_cod_barra_livro.'</td>
+                            <td class="text-center">'.$obItensReservas->codBarras[$i].'</td>
+                            <td class="text-center">'.$obItensReservas->titulos[$i].'</td>
                         </tr>';
     }
 
@@ -26,8 +27,8 @@
         <table class="table bg-white mt-4">
             <thead>
                 <tr>
-                    <th class="text-center">COD_ITEM</th>
                     <th class="text-center">COD_LIVRO</th>
+                    <th class="text-center">TITULO</th>
                 </tr>
             </thead>
             <tbody>
